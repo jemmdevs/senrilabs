@@ -1,0 +1,131 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '@/styles/globals.css';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Cognitive Design - Human Interface">
+  <Navbar client:load />
+  
+  <main class="ml-64 min-h-screen bg-white">
+    <!-- Hero Section -->
+    <section class="px-16 py-24">
+      <div class="max-w-4xl">
+        <h1 class="text-7xl font-bold text-black mb-6 leading-tight">
+          Cognitive Design
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl leading-relaxed">
+          Human Interface Design focuses on creating intuitive experiences that align with how people naturally think and interact. 
+          It emphasizes clarity, consistency, and feedback—ensuring that every interaction feels effortless and predictable.
+        </p>
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl leading-relaxed">
+          Through careful attention to visual hierarchy, motion, and cognitive load, Human Interface Design creates 
+          interfaces that don't just look beautiful, but feel natural to use.
+        </p>
+        <div class="flex gap-4">
+          <a 
+            href="/cognitive-design/components" 
+            class="inline-block px-8 py-4 bg-black text-white rounded-xl hover:bg-gray-800 transition-all duration-300 font-medium"
+          >
+            View Components
+          </a>
+          <a 
+            href="/cognitive-design/guidelines" 
+            class="inline-block px-8 py-4 bg-gray-100 text-black rounded-xl hover:bg-gray-200 transition-all duration-300 font-medium"
+          >
+            Read Guidelines
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="px-16 py-20 bg-[#F1F1F1]">
+      <div class="max-w-6xl">
+        <h2 class="text-4xl font-bold text-black mb-4">Featured Projects</h2>
+        <p class="text-lg text-gray-600 mb-12">
+          Explore interactive demonstrations of Human Interface principles in action.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Project 1 -->
+          <a 
+            href="/cognitive-design/components#project-1"
+            class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+              <span class="text-white text-2xl font-semibold">Project 1</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                Interactive Navigation
+              </h3>
+              <p class="text-gray-600">
+                Demonstrating fluid transitions and intuitive navigation patterns that guide users seamlessly through complex information.
+              </p>
+            </div>
+          </a>
+
+          <!-- Project 2 -->
+          <a 
+            href="/cognitive-design/components#project-2"
+            class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-video bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+              <span class="text-white text-2xl font-semibold">Project 2</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                Feedback Systems
+              </h3>
+              <p class="text-gray-600">
+                Clear visual and interactive feedback that keeps users informed and confident in their actions.
+              </p>
+            </div>
+          </a>
+
+          <!-- Project 3 -->
+          <a 
+            href="/cognitive-design/components#project-3"
+            class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-video bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+              <span class="text-white text-2xl font-semibold">Project 3</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                Contextual Actions
+              </h3>
+              <p class="text-gray-600">
+                Context-aware interfaces that present the right options at the right time, reducing cognitive load.
+              </p>
+            </div>
+          </a>
+
+          <!-- Project 4 -->
+          <a 
+            href="/cognitive-design/components#project-4"
+            class="group bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300"
+          >
+            <div class="aspect-video bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center">
+              <span class="text-white text-2xl font-semibold">Project 4</span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-2xl font-semibold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                Motion Design
+              </h3>
+              <p class="text-gray-600">
+                Purposeful animations that provide continuity and help users understand spatial relationships.
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</Layout>
+

@@ -1,0 +1,208 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '@/styles/globals.css';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Components - Cognitive Design">
+  <Navbar client:load />
+  
+  <main class="ml-64 min-h-screen bg-white pt-12 flex">
+    <!-- Main Content -->
+    <div class="flex-1 max-w-5xl pl-12 pr-8">
+      <!-- Back link -->
+      <div class="mb-12">
+        <a href="/cognitive-design" class="text-[#6B7280] hover:text-black transition-colors text-sm underline">
+          Back
+        </a>
+      </div>
+
+      <!-- Glassy Button Component -->
+      <section id="glassy-button" class="mb-24 scroll-mt-12">
+        <!-- Component Header -->
+        <div class="flex items-start justify-between mb-4">
+          <h2 class="text-[20px] font-semibold text-black leading-tight">Glassy button</h2>
+          <span class="text-[14px] text-[#86868b]">Oct 28, 2025</span>
+        </div>
+        
+        <!-- Component Description -->
+        <p class="text-[14px] text-[#86868b] leading-relaxed mb-8">
+          A translucent button with frosted glass effect and smooth interactions, inspired by Apple's Liquid Glass design language.
+        </p>
+        
+        <!-- Component Container -->
+        <div class="component-glassy-button bg-[#E5E7EB] rounded-2xl p-32 min-h-[500px] w-full flex items-center justify-center relative overflow-hidden">
+          <!-- Decorative gradient background -->
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-purple-400/20 to-pink-400/20"></div>
+          
+          <!-- Liquid Glass Button -->
+          <button class="liquid-glass-button">
+            Continue
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Side Navigation Menu (Right) -->
+    <aside class="w-64 pl-8 pr-12 sticky top-1/2 -translate-y-1/2 h-fit">
+      <nav class="space-y-2">
+        <a href="#glassy-button" class="nav-item active block text-[14px] text-gray-400 transition-all duration-300">
+          Glassy Button
+        </a>
+        <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Dropdown Menu
+        </a>
+        <a href="#notification-card" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Notification Card
+        </a>
+        <a href="#toggle-switch" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Toggle Switch
+        </a>
+      </nav>
+    </aside>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Navigation items bounce effect (Apple-style) */
+  .nav-item {
+    transform-origin: left center;
+    position: relative;
+    padding: 4px 0 4px 12px;
+  }
+
+  /* Active indicator - vertical line (Apple style) */
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 16px;
+    background: rgb(0, 0, 0);
+    border-radius: 1px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+
+  .nav-item.active {
+    color: rgb(0, 0, 0);
+  }
+
+  .nav-item:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.08) translateX(2px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .nav-item:active {
+    transform: scale(0.98) translateX(1px);
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Scoped styles for Glassy Button component */
+  .component-glassy-button .liquid-glass-button {
+    position: relative;
+    padding: 14px 48px;
+    font-size: 17px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    backdrop-filter: blur(60px) saturate(200%);
+    -webkit-backdrop-filter: blur(60px) saturate(200%);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.075);
+    overflow: hidden;
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.3px;
+  }
+
+  /* Liquid glass shimmer effect */
+  .component-glassy-button .liquid-glass-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.075);
+    pointer-events: none;
+  }
+
+  /* Glass refraction highlight */
+  .component-glassy-button .liquid-glass-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      transparent 100%
+    );
+    border-radius: 16px 16px 0 0;
+    pointer-events: none;
+  }
+
+  /* Hover state - liquid lift */
+  .component-glassy-button .liquid-glass-button:hover {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 
+      0 15px 50px rgba(0, 0, 0, 0.2),
+      0 5px 15px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .component-glassy-button .liquid-glass-button:hover::before {
+    left: 100%;
+  }
+
+  /* Active state - liquid compression */
+  .component-glassy-button .liquid-glass-button:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.075);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  }
+</style>
