@@ -8,27 +8,27 @@ import Footer from '@/components/Footer.astro';
 <Layout title="Human Interface Design Guidelines">
   <Navbar client:load />
   
-  <main class="ml-64 min-h-screen bg-white">
+  <main class="lg:ml-64 min-h-screen bg-white">
     <!-- Hero Section -->
-    <section class="px-16 py-24">
+    <section class="px-6 lg:px-16 py-12 lg:py-24">
       <div class="max-w-4xl">
-        <h1 class="text-7xl font-bold text-black mb-6 leading-tight">
+        <h1 class="text-4xl lg:text-7xl font-bold text-black mb-6 leading-tight">
           Human Interface
           <span class="block">Design Guidelines</span>
     </h1>
-        <p class="text-2xl text-gray-600 mb-8 max-w-2xl">
+        <p class="text-lg lg:text-2xl text-gray-600 mb-8 max-w-2xl">
           A comprehensive guide to creating intuitive, beautiful, and human-centered interfaces inspired by Apple's design philosophy.
         </p>
-        <div class="flex gap-4">
+        <div class="flex flex-col sm:flex-row gap-4">
           <a 
             href="/apple-style" 
-            class="inline-block px-8 py-4 bg-black text-white rounded-xl hover:bg-gray-800 transition-all duration-300 font-medium"
+            class="inline-block px-6 lg:px-8 py-3 lg:py-4 bg-black text-white rounded-xl hover:bg-gray-800 transition-all duration-300 font-medium text-center"
           >
             Explore Guidelines
           </a>
           <a 
             href="#principles" 
-            class="inline-block px-8 py-4 bg-gray-100 text-black rounded-xl hover:bg-gray-200 transition-all duration-300 font-medium"
+            class="inline-block px-6 lg:px-8 py-3 lg:py-4 bg-gray-100 text-black rounded-xl hover:bg-gray-200 transition-all duration-300 font-medium text-center"
           >
             Learn Principles
           </a>
@@ -37,11 +37,11 @@ import Footer from '@/components/Footer.astro';
     </section>
 
     <!-- Design Principles Section -->
-    <section id="principles" class="px-16 py-20 bg-[#F1F1F1]">
+    <section id="principles" class="px-6 lg:px-16 py-12 lg:py-20 bg-[#F1F1F1]">
       <div class="max-w-6xl">
-        <h2 class="text-4xl font-bold text-black mb-12">Core Design Principles</h2>
+        <h2 class="text-3xl lg:text-4xl font-bold text-black mb-8 lg:mb-12">Core Design Principles</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           <!-- Principle 1 -->
           <div class="bg-white p-8 rounded-2xl hover:shadow-lg transition-all duration-300">
             <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-4">
@@ -79,14 +79,14 @@ import Footer from '@/components/Footer.astro';
     </section>
 
     <!-- Categories Section -->
-    <section class="px-16 py-20">
+    <section class="px-6 lg:px-16 py-12 lg:py-20">
       <div class="max-w-6xl">
-        <h2 class="text-4xl font-bold text-black mb-4">Explore by Category</h2>
-        <p class="text-lg text-gray-600 mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold text-black mb-4">Explore by Category</h2>
+        <p class="text-base lg:text-lg text-gray-600 mb-8 lg:mb-12">
           Dive deep into specific interface design patterns and implementations.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- Apple Style Card -->
           <a 
             href="/apple-style"

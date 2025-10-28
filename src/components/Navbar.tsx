@@ -19,6 +19,7 @@ interface MousePosition {
 }
 
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeItemBySection, setActiveItemBySection] = useState<{
     humanInterface: string | null;
     webInterfaces: string | null;
@@ -40,7 +41,6 @@ const Navbar = () => {
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now();
       mouseHistory.current.push({ x: e.clientX, y: e.clientY, time: now });
-      // Keep only last 3 positions for direction calculation
       if (mouseHistory.current.length > 3) {
         mouseHistory.current.shift();
       }
@@ -50,18 +50,27 @@ const Navbar = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Close mobile menu when resizing to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileMenuOpen]);
+
   const isMovingTowardsSubmenu = (section: 'humanInterface' | 'webInterfaces'): boolean => {
     if (mouseHistory.current.length < 2) return false;
 
     const recent = mouseHistory.current[mouseHistory.current.length - 1];
     const prev = mouseHistory.current[mouseHistory.current.length - 2];
 
-    // Calculate if moving down (towards submenu which is below)
     const deltaY = recent.y - prev.y;
     const deltaX = Math.abs(recent.x - prev.x);
 
-    // If moving down and not too much horizontal movement, consider it "towards submenu"
-    // Positive deltaY = moving down, which is towards the submenu
     return deltaY > 0 && deltaX < 50;
   };
 
@@ -78,15 +87,20 @@ const Navbar = () => {
     }));
   };
 
+  const handleItemClick = (section: 'humanInterface' | 'webInterfaces', itemName: string) => {
+    // Toggle on mobile
+    setActiveItemBySection((prev) => ({
+      ...prev,
+      [section]: prev[section] === itemName ? null : itemName,
+    }));
+  };
+
   const handleItemLeave = (section: 'humanInterface' | 'webInterfaces') => {
-    // Clear any existing timeout
     if (leaveTimeoutRef.current) {
       clearTimeout(leaveTimeoutRef.current);
     }
 
-    // Check if mouse is moving towards submenu
     if (isMovingTowardsSubmenu(section)) {
-      // Give more time if moving towards submenu (400ms)
       leaveTimeoutRef.current = setTimeout(() => {
         setActiveItemBySection((prev) => ({
           ...prev,
@@ -95,7 +109,6 @@ const Navbar = () => {
         setHoveredItem({ section: null, item: null });
       }, 400);
     } else {
-      // Delay even when moving away to allow smooth transitions (200ms)
       leaveTimeoutRef.current = setTimeout(() => {
         setActiveItemBySection((prev) => ({
           ...prev,
@@ -124,7 +137,6 @@ const Navbar = () => {
       subItems: [
         { name: 'Components', href: '/cognitive-design/components' },
         { name: 'Guidelines', href: '/cognitive-design/guidelines' },
-      
       ],
     },
     {
@@ -133,7 +145,6 @@ const Navbar = () => {
       subItems: [
         { name: 'Components', href: '/spatial-interfaces/components' },
         { name: 'Guidelines', href: '/spatial-interfaces/guidelines' },
-        
       ],
     },
   ];
@@ -157,7 +168,7 @@ const Navbar = () => {
     },
   ];
 
-  const renderNavItem = (item: NavItem, section: 'humanInterface' | 'webInterfaces') => {
+  const renderNavItem = (item: NavItem, section: 'humanInterface' | 'webInterfaces', isMobile: boolean = false) => {
     const isActive = activeItemBySection[section] === item.name;
     
     return (
@@ -165,12 +176,12 @@ const Navbar = () => {
         key={item.name}
         className="relative"
         onMouseEnter={() => {
-          if (item.subItems) {
+          if (!isMobile && item.subItems) {
             handleItemHover(section, item.name);
           }
         }}
         onMouseLeave={() => {
-          if (item.subItems) {
+          if (!isMobile && item.subItems) {
             handleItemLeave(section);
           }
         }}
@@ -178,13 +189,19 @@ const Navbar = () => {
         <div className="py-0.5 px-4">
           <a
             href={item.href}
+            onClick={(e) => {
+              if (isMobile && item.subItems) {
+                e.preventDefault();
+                handleItemClick(section, item.name);
+              }
+            }}
             className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
           >
             {item.name}
           </a>
         </div>
 
-        {/* Reserve space for submenu to prevent layout shifts */}
+        {/* Submenu */}
         {item.subItems && (
           <div className="overflow-hidden">
             <AnimatePresence mode="wait">
@@ -199,12 +216,16 @@ const Navbar = () => {
                   }}
                   className="ml-4 space-y-0 border-l-2 border-gray-300 pl-3 mb-1"
                   onMouseEnter={() => {
-                    if (leaveTimeoutRef.current) {
+                    if (!isMobile && leaveTimeoutRef.current) {
                       clearTimeout(leaveTimeoutRef.current);
                       leaveTimeoutRef.current = null;
                     }
                   }}
-                  onMouseLeave={() => handleItemLeave(section)}
+                  onMouseLeave={() => {
+                    if (!isMobile) {
+                      handleItemLeave(section);
+                    }
+                  }}
                 >
                   {item.subItems.map((subItem, index) => (
                     <motion.div 
@@ -220,6 +241,11 @@ const Navbar = () => {
                     >
                       <a
                         href={subItem.href}
+                        onClick={() => {
+                          if (isMobile) {
+                            setIsMobileMenuOpen(false);
+                          }
+                        }}
                         className="inline-block text-xs text-black hover:text-gray-500 transition-colors duration-150"
                       >
                         {subItem.name}
@@ -236,119 +262,261 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex flex-col py-6 px-6">
-      {/* Section 1: Personal Links */}
-      <div className="mb-3">
-        <a 
-          href="/" 
-          className="bg-[#F1F1F1] px-4 py-2 mb-2 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
-        >
-          <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
-        </a>
-        <div className="space-y-0.5">
-          <div className="py-0.5 px-4">
-            <a
-              href="https://josencv.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
-            >
-              Work
-            </a>
-          </div>
-          <div className="py-0.5 px-4">
-            <a
-              href="https://senrilab.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
-            >
-              Blog
-            </a>
-          </div>
-          <div className="py-0.5 px-4">
-            <a
-              href="/cv"
-              className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
-            >
-              CV
-            </a>
+    <>
+      {/* Mobile Hamburger Button */}
+      <button
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        className="lg:hidden fixed top-4 right-4 z-50 w-12 h-12 flex flex-col items-center justify-center bg-white rounded-lg shadow-lg border border-gray-200"
+        aria-label="Toggle menu"
+      >
+        <span className={`block w-6 h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-black mt-1.5 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-black mt-1.5 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+      </button>
+
+      {/* Desktop Navbar */}
+      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-200 flex-col py-6 px-6">
+        {/* Section 1: Personal Links */}
+        <div className="mb-3">
+          <a 
+            href="/" 
+            className="bg-[#F1F1F1] px-4 py-2 mb-2 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+          >
+            <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+          </a>
+          <div className="space-y-0.5">
+            <div className="py-0.5 px-4">
+              <a
+                href="https://josencv.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+              >
+                Work
+              </a>
+            </div>
+            <div className="py-0.5 px-4">
+              <a
+                href="https://senrilab.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+              >
+                Blog
+              </a>
+            </div>
+            <div className="py-0.5 px-4">
+              <a
+                href="/cv"
+                className="inline-block text-[20px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+              >
+                CV
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Divider */}
-      <div className="border-t border-gray-200 my-3 -mx-6"></div>
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-3 -mx-6"></div>
 
-      {/* Section 2: Human Interface & Web Interfaces */}
-      <div className="flex-shrink-0">
-        {/* Human Interface */}
-        <div 
-          className="mb-8"
-          onMouseLeave={() => handleSectionLeave('humanInterface')}
-        >
-          <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0">
-            HUMAN INTERFACE
+        {/* Section 2: Human Interface & Web Interfaces */}
+        <div className="flex-shrink-0">
+          {/* Human Interface */}
+          <div 
+            className="mb-8"
+            onMouseLeave={() => handleSectionLeave('humanInterface')}
+          >
+            <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0">
+              HUMAN INTERFACE
+            </h2>
+            <div className="space-y-1">
+              {humanInterfaceItems.map((item) => renderNavItem(item, 'humanInterface', false))}
+            </div>
+          </div>
+
+          {/* Web Interfaces */}
+          <div 
+            className="mb-3"
+            onMouseLeave={() => handleSectionLeave('webInterfaces')}
+          >
+            <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0">
+              WEB INTERFACES
+            </h2>
+            <div className="space-y-1">
+              {webInterfacesItems.map((item) => renderNavItem(item, 'webInterfaces', false))}
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-200 my-3 -mx-6"></div>
+
+        {/* Section 3: Contact */}
+        <div>
+          <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0.5">
+            CONTACT ME
           </h2>
-          <div className="space-y-1">
-            {humanInterfaceItems.map((item) => renderNavItem(item, 'humanInterface'))}
+          <div className="space-y-0.5">
+            <div className="py-0.5 px-4">
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
+              >
+                GitHub
+              </a>
+            </div>
+            <div className="py-0.5 px-4">
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
+              >
+                LinkedIn
+              </a>
+            </div>
+            <div className="py-0.5 px-4">
+              <a
+                href="mailto:your@email.com"
+                className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
+              >
+                Email
+              </a>
+            </div>
           </div>
         </div>
+      </nav>
 
-        {/* Web Interfaces */}
-        <div 
-          className="mb-3"
-          onMouseLeave={() => handleSectionLeave('webInterfaces')}
-        >
-          <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0">
-            WEB INTERFACES
-          </h2>
-          <div className="space-y-1">
-            {webInterfacesItems.map((item) => renderNavItem(item, 'webInterfaces'))}
-          </div>
-        </div>
-      </div>
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'tween', duration: 0.3 }}
+            className="lg:hidden fixed inset-0 z-40 bg-white overflow-y-auto"
+          >
+            <div className="flex flex-col py-20 px-6">
+              {/* Section 1: Personal Links */}
+              <div className="mb-6">
+                <a 
+                  href="/" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="bg-[#F1F1F1] px-4 py-2 mb-4 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+                >
+                  <h1 className="text-[24px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+                </a>
+                <div className="space-y-2">
+                  <div className="py-1 px-4">
+                    <a
+                      href="https://josencv.vercel.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-[24px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+                    >
+                      Work
+                    </a>
+                  </div>
+                  <div className="py-1 px-4">
+                    <a
+                      href="https://senrilab.vercel.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-[24px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+                    >
+                      Blog
+                    </a>
+                  </div>
+                  <div className="py-1 px-4">
+                    <a
+                      href="/cv"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-[24px] text-black font-semibold hover:text-gray-500 transition-colors duration-200"
+                    >
+                      CV
+                    </a>
+                  </div>
+                </div>
+              </div>
 
-      {/* Divider */}
-      <div className="border-t border-gray-200 my-3 -mx-6"></div>
+              {/* Divider */}
+              <div className="border-t border-gray-200 my-4"></div>
 
-      {/* Section 3: Contact */}
-      <div>
-        <h2 className="text-[14px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0.5">
-          CONTACT ME
-        </h2>
-        <div className="space-y-0.5">
-          <div className="py-0.5 px-4">
-            <a
-              href="https://github.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
-            >
-              GitHub
-            </a>
-          </div>
-          <div className="py-0.5 px-4">
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
-            >
-              LinkedIn
-            </a>
-          </div>
-          <div className="py-0.5 px-4">
-            <a
-              href="mailto:your@email.com"
-              className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
-            >
-              Email
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+              {/* Section 2: Human Interface & Web Interfaces */}
+              <div className="flex-shrink-0">
+                {/* Human Interface */}
+                <div className="mb-6">
+                  <h2 className="text-[18px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
+                    HUMAN INTERFACE
+                  </h2>
+                  <div className="space-y-2">
+                    {humanInterfaceItems.map((item) => renderNavItem(item, 'humanInterface', true))}
+                  </div>
+                </div>
+
+                {/* Web Interfaces */}
+                <div className="mb-6">
+                  <h2 className="text-[18px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
+                    WEB INTERFACES
+                  </h2>
+                  <div className="space-y-2">
+                    {webInterfacesItems.map((item) => renderNavItem(item, 'webInterfaces', true))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-gray-200 my-4"></div>
+
+              {/* Section 3: Contact */}
+              <div>
+                <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
+                  CONTACT ME
+                </h2>
+                <div className="space-y-2">
+                  <div className="py-1 px-4">
+                    <a
+                      href="https://github.com/yourusername"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-base text-black hover:text-gray-500 transition-colors duration-200"
+                    >
+                      GitHub
+                    </a>
+                  </div>
+                  <div className="py-1 px-4">
+                    <a
+                      href="https://linkedin.com/in/yourusername"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-base text-black hover:text-gray-500 transition-colors duration-200"
+                    >
+                      LinkedIn
+                    </a>
+                  </div>
+                  <div className="py-1 px-4">
+                    <a
+                      href="mailto:your@email.com"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="inline-block text-base text-black hover:text-gray-500 transition-colors duration-200"
+                    >
+                      Email
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
