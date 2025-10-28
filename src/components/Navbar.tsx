@@ -285,9 +285,14 @@ const Navbar = () => {
     <>
       {/* Mobile Hamburger Button */}
       <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 right-4 z-50 w-12 h-12 flex flex-col items-center justify-center bg-white rounded-lg shadow-lg border border-gray-200"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsMobileMenuOpen(!isMobileMenuOpen);
+        }}
+        className="lg:hidden fixed top-4 right-4 z-[100] w-12 h-12 flex flex-col items-center justify-center bg-white rounded-lg shadow-lg border border-gray-200 touch-manipulation active:scale-95 transition-transform"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
         aria-label="Toggle menu"
+        type="button"
       >
         <span className={`block w-6 h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
         <span className={`block w-6 h-0.5 bg-black mt-1.5 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
@@ -417,8 +422,8 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="lg:hidden fixed inset-0 z-40 bg-white overflow-y-auto overscroll-contain"
-            style={{ overscrollBehavior: 'contain' }}
+            className="lg:hidden fixed inset-0 z-[90] bg-white overflow-y-auto overscroll-contain"
+            style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }}
           >
             <div className="flex flex-col py-20 px-6">
               {/* Section 1: Personal Links */}
