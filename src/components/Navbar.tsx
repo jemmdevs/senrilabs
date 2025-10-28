@@ -62,6 +62,20 @@ const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const isMovingTowardsSubmenu = (section: 'humanInterface' | 'webInterfaces'): boolean => {
     if (mouseHistory.current.length < 2) return false;
 
@@ -191,8 +205,14 @@ const Navbar = () => {
             href={item.href}
             onClick={(e) => {
               if (isMobile && item.subItems) {
-                e.preventDefault();
-                handleItemClick(section, item.name);
+                // If submenu is already open, allow navigation
+                if (isActive) {
+                  setIsMobileMenuOpen(false);
+                } else {
+                  // If submenu is closed, open it
+                  e.preventDefault();
+                  handleItemClick(section, item.name);
+                }
               }
             }}
             className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
@@ -397,7 +417,8 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="lg:hidden fixed inset-0 z-40 bg-white overflow-y-auto"
+            className="lg:hidden fixed inset-0 z-40 bg-white overflow-y-auto overscroll-contain"
+            style={{ overscrollBehavior: 'contain' }}
           >
             <div className="flex flex-col py-20 px-6">
               {/* Section 1: Personal Links */}
