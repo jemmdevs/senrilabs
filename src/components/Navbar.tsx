@@ -21,14 +21,14 @@ interface MousePosition {
 const Navbar = () => {
   const [activeItemBySection, setActiveItemBySection] = useState<{
     humanInterface: string | null;
-    webDesign: string | null;
+    webInterfaces: string | null;
   }>({
     humanInterface: null,
-    webDesign: null,
+    webInterfaces: null,
   });
 
   const [hoveredItem, setHoveredItem] = useState<{
-    section: 'humanInterface' | 'webDesign' | null;
+    section: 'humanInterface' | 'webInterfaces' | null;
     item: string | null;
   }>({ section: null, item: null });
 
@@ -50,7 +50,7 @@ const Navbar = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const isMovingTowardsSubmenu = (section: 'humanInterface' | 'webDesign'): boolean => {
+  const isMovingTowardsSubmenu = (section: 'humanInterface' | 'webInterfaces'): boolean => {
     if (mouseHistory.current.length < 2) return false;
 
     const recent = mouseHistory.current[mouseHistory.current.length - 1];
@@ -65,7 +65,7 @@ const Navbar = () => {
     return deltaY > 0 && deltaX < 50;
   };
 
-  const handleItemHover = (section: 'humanInterface' | 'webDesign', itemName: string) => {
+  const handleItemHover = (section: 'humanInterface' | 'webInterfaces', itemName: string) => {
     if (leaveTimeoutRef.current) {
       clearTimeout(leaveTimeoutRef.current);
       leaveTimeoutRef.current = null;
@@ -78,7 +78,7 @@ const Navbar = () => {
     }));
   };
 
-  const handleItemLeave = (section: 'humanInterface' | 'webDesign') => {
+  const handleItemLeave = (section: 'humanInterface' | 'webInterfaces') => {
     // Clear any existing timeout
     if (leaveTimeoutRef.current) {
       clearTimeout(leaveTimeoutRef.current);
@@ -106,7 +106,7 @@ const Navbar = () => {
     }
   };
 
-  const handleSectionLeave = (section: 'humanInterface' | 'webDesign') => {
+  const handleSectionLeave = (section: 'humanInterface' | 'webInterfaces') => {
     if (leaveTimeoutRef.current) {
       clearTimeout(leaveTimeoutRef.current);
     }
@@ -138,26 +138,26 @@ const Navbar = () => {
     },
   ];
 
-  const webDesignItems: NavItem[] = [
+  const webInterfacesItems: NavItem[] = [
     {
       name: 'Utility UI',
-      href: '/web-design/utility-ui',
+      href: '/web-interfaces/utility-ui',
       subItems: [
-        { name: 'Components', href: '/web-design/utility-ui/components' },
-        { name: 'Guidelines', href: '/web-design/utility-ui/guidelines' },
+        { name: 'Components', href: '/web-interfaces/utility-ui/components' },
+        { name: 'Guidelines', href: '/web-interfaces/utility-ui/guidelines' },
       ],
     },
     {
       name: 'Expressive UI',
-      href: '/web-design/expressive-ui',
+      href: '/web-interfaces/expressive-ui',
       subItems: [
-        { name: 'Components', href: '/web-design/expressive-ui/components' },
-        { name: 'Guidelines', href: '/web-design/expressive-ui/guidelines' },
+        { name: 'Components', href: '/web-interfaces/expressive-ui/components' },
+        { name: 'Guidelines', href: '/web-interfaces/expressive-ui/guidelines' },
       ],
     },
   ];
 
-  const renderNavItem = (item: NavItem, section: 'humanInterface' | 'webDesign') => {
+  const renderNavItem = (item: NavItem, section: 'humanInterface' | 'webInterfaces') => {
     const isActive = activeItemBySection[section] === item.name;
     
     return (
@@ -280,7 +280,7 @@ const Navbar = () => {
       {/* Divider */}
       <div className="border-t border-gray-200 my-3 -mx-6"></div>
 
-      {/* Section 2: Human Interface & Web Design */}
+      {/* Section 2: Human Interface & Web Interfaces */}
       <div className="flex-shrink-0">
         {/* Human Interface */}
         <div 
@@ -295,16 +295,16 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Web Design */}
+        {/* Web Interfaces */}
         <div 
           className="mb-3"
-          onMouseLeave={() => handleSectionLeave('webDesign')}
+          onMouseLeave={() => handleSectionLeave('webInterfaces')}
         >
           <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-1 mb-0">
-            WEB DESIGN
+            WEB INTERFACES
           </h2>
           <div className="space-y-1">
-            {webDesignItems.map((item) => renderNavItem(item, 'webDesign'))}
+            {webInterfacesItems.map((item) => renderNavItem(item, 'webInterfaces'))}
           </div>
         </div>
       </div>
