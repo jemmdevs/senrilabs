@@ -287,26 +287,26 @@ const Navbar = () => {
       {!isMobileMenuOpen && (
         <a
           href="/"
-          className="lg:hidden fixed top-4 left-4 z-[100] bg-[#F1F1F1] px-4 py-2 hover:bg-gray-200 transition-colors duration-200"
+          className="lg:hidden fixed top-3 left-3 z-[100] px-3 py-1.5 backdrop-blur-xl bg-white/80 hover:bg-white/90 transition-all duration-200 rounded-full border border-gray-200/50 shadow-sm"
         >
-          <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+          <h1 className="text-[16px] font-semibold text-black tracking-tight">千里</h1>
         </a>
       )}
 
-      {/* Mobile Hamburger Button */}
+      {/* Mobile Hamburger Button - Apple Style */}
       <button
         onClick={(e) => {
           e.stopPropagation();
           setIsMobileMenuOpen(!isMobileMenuOpen);
         }}
-        className="lg:hidden fixed top-4 right-4 z-[100] w-12 h-12 flex flex-col items-center justify-center bg-white rounded-lg shadow-lg border border-gray-200 touch-manipulation active:scale-95 transition-transform"
+        className="lg:hidden fixed top-3 right-3 z-[100] w-10 h-10 flex flex-col items-center justify-center backdrop-blur-xl bg-white/80 hover:bg-white/90 rounded-full border border-gray-200/50 shadow-sm touch-manipulation active:scale-95 transition-all duration-200"
         style={{ WebkitTapHighlightColor: 'transparent' }}
         aria-label="Toggle menu"
         type="button"
       >
-        <span className={`block w-6 h-0.5 bg-black transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-black mt-1.5 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-        <span className={`block w-6 h-0.5 bg-black mt-1.5 transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+        <span className={`block w-[18px] h-[2px] bg-black rounded-full transition-all duration-300 ease-out ${isMobileMenuOpen ? 'rotate-45 translate-y-[7px]' : ''}`}></span>
+        <span className={`block w-[18px] h-[2px] bg-black rounded-full mt-[5px] transition-all duration-300 ease-out ${isMobileMenuOpen ? 'opacity-0 scale-0' : ''}`}></span>
+        <span className={`block w-[18px] h-[2px] bg-black rounded-full mt-[5px] transition-all duration-300 ease-out ${isMobileMenuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}></span>
       </button>
 
       {/* Desktop Navbar */}
@@ -315,9 +315,9 @@ const Navbar = () => {
         <div className="mb-3">
           <a 
             href="/" 
-            className="bg-[#F1F1F1] px-4 py-2 mb-2 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+            className="bg-gray-50 px-4 py-2.5 mb-2 inline-block hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-lg border border-gray-200/50"
           >
-            <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+            <h1 className="text-[22px] font-semibold text-black tracking-tight">千里</h1>
           </a>
           <div className="space-y-0.5">
             <div className="py-0.5 px-4">
@@ -424,29 +424,62 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu Backdrop */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="lg:hidden fixed inset-0 z-[85] bg-black/20 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '-100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
+            initial={{ x: '-100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '-100%', opacity: 0 }}
+            transition={{ 
+              type: 'spring',
+              stiffness: 300,
+              damping: 30,
+              mass: 0.8,
+              opacity: { duration: 0.2 }
+            }}
             className="lg:hidden fixed inset-0 z-[90] bg-white overflow-y-auto overscroll-contain"
-            style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }}
+            style={{ 
+              overscrollBehavior: 'contain', 
+              touchAction: 'pan-y'
+            }}
           >
-            <div className="flex flex-col pt-4 pb-6 px-6">
+            <div className="flex flex-col pt-3 pb-6 px-6">
               {/* Section 1: Personal Links */}
-              <div className="mb-6">
+              <motion.div 
+                className="mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <a 
                   href="/" 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="bg-[#F1F1F1] px-4 py-2 mb-3 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+                  className="px-3 py-1.5 mb-3 inline-block backdrop-blur-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer rounded-full border border-gray-200/50"
                 >
-                  <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+                  <h1 className="text-[16px] font-semibold text-black tracking-tight">千里</h1>
                 </a>
                 <div className="space-y-2">
-                  <div className="py-1 px-4">
+                  <motion.div 
+                    className="py-1 px-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.15, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  >
                     <a
                       href="https://josencv.vercel.app"
                       target="_blank"
@@ -456,8 +489,13 @@ const Navbar = () => {
                     >
                       Work
                     </a>
-                  </div>
-                  <div className="py-1 px-4">
+                  </motion.div>
+                  <motion.div 
+                    className="py-1 px-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  >
                     <a
                       href="https://senrilab.vercel.app"
                       target="_blank"
@@ -467,8 +505,13 @@ const Navbar = () => {
                     >
                       Blog
                     </a>
-                  </div>
-                  <div className="py-1 px-4">
+                  </motion.div>
+                  <motion.div 
+                    className="py-1 px-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.25, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  >
                     <a
                       href="/cv"
                       onClick={() => setIsMobileMenuOpen(false)}
@@ -476,41 +519,65 @@ const Navbar = () => {
                     >
                       CV
                     </a>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Divider */}
-              <div className="border-t border-gray-200 my-4"></div>
+              <motion.div 
+                className="border-t border-gray-200 my-4"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ delay: 0.3, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              />
 
               {/* Section 2: Human Interface & Web Interfaces */}
               <div className="flex-shrink-0">
                 {/* Human Interface */}
-                <div className="mb-6">
+                <motion.div 
+                  className="mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
                   <h2 className="text-[18px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
                     HUMAN INTERFACE
                   </h2>
                   <div className="space-y-2">
                     {humanInterfaceItems.map((item) => renderNavItem(item, 'humanInterface', true))}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Web Interfaces */}
-                <div className="mb-6">
+                <motion.div 
+                  className="mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
                   <h2 className="text-[18px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
                     WEB INTERFACES
                   </h2>
                   <div className="space-y-2">
                     {webInterfacesItems.map((item) => renderNavItem(item, 'webInterfaces', true))}
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Divider */}
-              <div className="border-t border-gray-200 my-4"></div>
+              <motion.div 
+                className="border-t border-gray-200 my-4"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ delay: 0.45, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              />
 
               {/* Section 3: Contact */}
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              >
                 <h2 className="text-[16px] font-semibold tracking-wider text-gray-400 px-4 py-2 mb-2">
                   CONTACT ME
                 </h2>
@@ -547,7 +614,7 @@ const Navbar = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
