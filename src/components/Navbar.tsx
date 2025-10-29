@@ -283,6 +283,16 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Mobile Logo - Left Side - Hidden when menu is open */}
+      {!isMobileMenuOpen && (
+        <a
+          href="/"
+          className="lg:hidden fixed top-4 left-4 z-[100] bg-[#F1F1F1] px-4 py-2 hover:bg-gray-200 transition-colors duration-200"
+        >
+          <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+        </a>
+      )}
+
       {/* Mobile Hamburger Button */}
       <button
         onClick={(e) => {
@@ -425,15 +435,15 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 z-[90] bg-white overflow-y-auto overscroll-contain"
             style={{ overscrollBehavior: 'contain', touchAction: 'pan-y' }}
           >
-            <div className="flex flex-col py-20 px-6">
+            <div className="flex flex-col pt-4 pb-6 px-6">
               {/* Section 1: Personal Links */}
               <div className="mb-6">
                 <a 
                   href="/" 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="bg-[#F1F1F1] px-4 py-2 mb-4 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+                  className="bg-[#F1F1F1] px-4 py-2 mb-3 inline-block hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
                 >
-                  <h1 className="text-[24px] font-semibold text-black">丂乇刀尺ﾉ</h1>
+                  <h1 className="text-[20px] font-semibold text-black">丂乇刀尺ﾉ</h1>
                 </a>
                 <div className="space-y-2">
                   <div className="py-1 px-4">

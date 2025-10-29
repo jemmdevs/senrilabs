@@ -9,10 +9,10 @@ import Footer from '@/components/Footer.astro';
   
   <main class="lg:ml-64 min-h-screen bg-white">
     <!-- Hero Section with fade-in animation -->
-    <section class="fade-in-content px-6 lg:px-12 pt-4 lg:pt-8 pb-12 lg:pb-20">
+    <section class="fade-in-content px-6 lg:px-12 pt-20 lg:pt-8 pb-12 lg:pb-20">
       <div class="max-w-7xl mx-auto">
-        <!-- Greeting with elevated pronunciation -->
-        <div class="mb-8">
+        <!-- Greeting with elevated pronunciation - Hidden on mobile -->
+        <div class="mb-8 hidden lg:block">
           <h1 class="greeting-text mb-6">
             Hello there, こんにちは!<sup class="pronunciation">/kon-ni-chi-wa/</sup>
           </h1>
@@ -20,8 +20,7 @@ import Footer from '@/components/Footer.astro';
         
         <!-- Main description -->
         <p class="main-text gradient-text max-w-5xl leading-relaxed">
-          Senri is a developer exploring the future of intelligent interfaces — experiences that feel natural, thoughtful, and deeply human. He's passionate about how people interact with technology, and he loves creating digital spaces that make those interactions simple, engaging, and meaningful.
-        </p>
+          Senri is a developer crafting intelligent, human-centered interfaces that make technology feel effortless, thoughtful, and deeply connected to how we live.        </p>
       </div>
     </section>
 
@@ -152,11 +151,18 @@ import Footer from '@/components/Footer.astro';
     background-clip: text;
   }
 
-  /* Main text - 48px and weight 700 */
+  /* Main text - responsive sizing */
   .main-text {
-    font-size: 42px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 44px;
+    line-height: 28px;
+  }
+
+  @media (min-width: 1024px) {
+    .main-text {
+      font-size: 42px;
+      line-height: 44px;
+    }
   }
 
   /* Gradient text - more subtle */
