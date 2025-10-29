@@ -71,3 +71,14 @@ body, p, h1, h2, h3, h4, h5, h6 {
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom text selection color - Bright Yellow text with subtle background */
+::selection {
+  background-color: rgba(255, 255, 255);
+  color: #0A84FF;
+}
+
+::-moz-selection {
+  background-color: rgb(255, 255, 255);
+  color: #0A84FF;
+}
