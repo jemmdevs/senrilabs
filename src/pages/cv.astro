@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="CV - Senri">
+  <main class="fixed inset-0 w-full h-full bg-gray-900">
+    <!-- Floating Buttons - Centered Vertically on Left -->
+    <div class="fixed left-6 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+      <!-- Back Button -->
+      <a 
+        href="/"
+        class="group"
+      >
+        <div class="liquid-glass-button flex items-center gap-3 px-5 py-3 backdrop-blur-2xl bg-white/10 hover:bg-white/20 rounded-2xl transition-all duration-300 border border-white/20 shadow-2xl">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span class="text-white font-medium text-sm">Back</span>
+        </div>
+      </a>
+
+      <!-- Download Button -->
+      <a 
+        href="/SenriCV.pdf" 
+        download
+        class="group"
+      >
+        <div class="liquid-glass-button flex items-center gap-3 px-5 py-3 backdrop-blur-2xl bg-white/10 hover:bg-white/20 rounded-2xl transition-all duration-300 border border-white/20 shadow-2xl">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span class="text-white font-medium text-sm">Download</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Fullscreen PDF Viewer -->
+    <iframe
+      src="/SenriCV.pdf"
+      class="w-full h-full border-0"
+      title="Senri CV"
+    />
+  </main>
+</Layout>
+
+<style>
+  .liquid-glass-button {
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .liquid-glass-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  .liquid-glass-button:active {
+    transform: translateY(0);
+  }
+
+  /* Remove any default layout padding/margins */
+  :global(body) {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+</style>

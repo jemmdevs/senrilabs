@@ -166,18 +166,18 @@ const Navbar = () => {
   const webInterfacesItems: NavItem[] = [
     {
       name: 'Utility UI',
-      href: '/web-interfaces/utility-ui',
+      href: '/utility-ui',
       subItems: [
-        { name: 'Components', href: '/web-interfaces/utility-ui/components' },
-        { name: 'Guidelines', href: '/web-interfaces/utility-ui/guidelines' },
+        { name: 'Components', href: '/utility-ui/components' },
+        { name: 'Guidelines', href: '/utility-ui/guidelines' },
       ],
     },
     {
       name: 'Expressive UI',
-      href: '/web-interfaces/expressive-ui',
+      href: '/expressive-ui',
       subItems: [
-        { name: 'Components', href: '/web-interfaces/expressive-ui/components' },
-        { name: 'Guidelines', href: '/web-interfaces/expressive-ui/guidelines' },
+        { name: 'Components', href: '/expressive-ui/components' },
+        { name: 'Guidelines', href: '/expressive-ui/guidelines' },
       ],
     },
   ];

@@ -1,0 +1,377 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Components - Cognitive Design">
+  <Navbar client:idle />
+  
+  <main class="lg:ml-64 min-h-screen bg-white pt-20 lg:pt-12 flex flex-col lg:flex-row">
+    <!-- Main Content -->
+    <div class="flex-1 px-6 lg:pl-12 lg:pr-8">
+      <!-- Back link -->
+      <div class="mb-8 lg:mb-12">
+        <a href="/spatial-interfaces" class="text-[#6B7280] hover:text-black transition-colors text-sm underline">
+          Back
+        </a>
+      </div>
+
+      <!-- Glassy Button Component -->
+      <section id="glassy-button" class="mb-16 lg:mb-24 scroll-mt-12">
+        <!-- Component Header -->
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 gap-2">
+          <h2 class="text-[18px] lg:text-[20px] font-semibold text-black leading-tight">Glassy button</h2>
+          <span class="text-[14px] text-[#86868b]">Oct 28, 2025</span>
+        </div>
+        
+        <!-- Component Description -->
+        <p class="text-[14px] text-[#86868b] leading-relaxed mb-6 lg:mb-8">
+          A translucent button with frosted glass effect and smooth interactions, inspired by Apple's Liquid Glass design language.
+        </p>
+        
+        <!-- Component Container -->
+        <div class="component-glassy-button rounded-2xl p-8 lg:p-16 w-full flex items-center justify-center relative overflow-hidden">
+          <!-- Interactive Components Wrapper -->
+          <div class="interactive-wrapper">
+            <!-- Menu Component -->
+            <div class="liquidGlass-wrapper menu">
+              <div class="liquidGlass-effect"></div>
+              <div class="liquidGlass-tint"></div>
+              <div class="liquidGlass-shine"></div>
+              <div class="liquidGlass-text">
+                <div>📄 New file</div>
+                <div>📂 Open folder</div>
+                <div>⚙ Settings</div>
+                
+              </div>
+            </div>
+
+            <!-- Dock Component -->
+            <div class="liquidGlass-wrapper dock">
+              <div class="liquidGlass-effect"></div>
+              <div class="liquidGlass-tint"></div>
+              <div class="liquidGlass-shine"></div>
+              <div class="liquidGlass-text">
+                <div class="dock-items">
+                  <span class="dock-icon">📁</span>
+                  <span class="dock-icon">🗺</span>
+                  <span class="dock-icon">💬</span>
+                  <span class="dock-icon">📝</span>
+                  <span class="dock-icon">🧭</span>
+                  <span class="dock-icon">📚</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Button Component -->
+            <div class="liquidGlass-wrapper button">
+              <div class="liquidGlass-effect"></div>
+              <div class="liquidGlass-tint"></div>
+              <div class="liquidGlass-shine"></div>
+              <div class="liquidGlass-text">
+                <span class="button-text">Continue →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Side Navigation Menu (Right) - Hidden on mobile -->
+    <aside class="hidden lg:block w-64 pl-8 pr-12 sticky top-1/2 -translate-y-1/2 h-fit">
+      <nav class="space-y-2">
+        <a href="#glassy-button" class="nav-item active block text-[14px] text-gray-400 transition-all duration-300">
+          Glassy Button
+        </a>
+        <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Dropdown Menu
+        </a>
+        <a href="#notification-card" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Notification Card
+        </a>
+        <a href="#toggle-switch" class="nav-item block text-[14px] text-gray-400 transition-all duration-300">
+          Toggle Switch
+        </a>
+      </nav>
+    </aside>
+  </main>
+  
+  <Footer />
+
+  <!-- Hidden SVG for glass distortion effect -->
+  <svg style="display: none">
+    <filter
+      id="glass-distortion"
+      x="0%"
+      y="0%"
+      width="100%"
+      height="100%"
+      filterUnits="objectBoundingBox"
+    >
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.01 0.01"
+        numOctaves="1"
+        seed="5"
+        result="turbulence"
+      />
+
+      <feComponentTransfer in="turbulence" result="mapped">
+        <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+        <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+        <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+      </feComponentTransfer>
+
+      <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+
+      <feSpecularLighting
+        in="softMap"
+        surfaceScale="5"
+        specularConstant="1"
+        specularExponent="100"
+        lighting-color="white"
+        result="specLight"
+      >
+        <fePointLight x="-200" y="-200" z="300" />
+      </feSpecularLighting>
+
+      <feComposite
+        in="specLight"
+        operator="arithmetic"
+        k1="0"
+        k2="1"
+        k3="1"
+        k4="0"
+        result="litImage"
+      />
+
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="softMap"
+        scale="150"
+        xChannelSelector="R"
+        yChannelSelector="G"
+      />
+    </filter>
+  </svg>
+</Layout>
+
+<style>
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Navigation items bounce effect (Apple-style) */
+  .nav-item {
+    transform-origin: left center;
+    position: relative;
+    padding: 4px 0 4px 12px;
+  }
+
+  /* Active indicator - vertical line (Apple style) */
+  .nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 16px;
+    background: rgb(0, 0, 0);
+    border-radius: 1px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+
+  .nav-item.active {
+    color: rgb(0, 0, 0);
+  }
+
+  .nav-item:hover {
+    color: rgb(0, 0, 0);
+    transform: scale(1.08) translateX(2px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .nav-item:active {
+    transform: scale(0.98) translateX(1px);
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Scoped styles for Glassy Button component */
+  .component-glassy-button {
+    background-image: url('/applebg.jpeg');
+    background-size: cover;
+    background-position: center;
+    /* CLAVE: Altura fija para que no empuje el contenido de abajo */
+    height: 350px;
+  }
+
+  /* Mobile height */
+  @media (max-width: 1023px) {
+    .component-glassy-button {
+      height: 300px;
+    }
+  }
+
+  .component-glassy-button .interactive-wrapper {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+  }
+
+  .component-glassy-button .liquidGlass-wrapper {
+    position: relative;
+    display: flex;
+    font-weight: 600;
+    overflow: hidden;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  .component-glassy-button .liquidGlass-wrapper:active {
+    transform: scale(0.96);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+
+  .component-glassy-button .liquidGlass-effect {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    backdrop-filter: blur(3px);
+    filter: url(#glass-distortion);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .component-glassy-button .liquidGlass-tint {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .component-glassy-button .liquidGlass-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
+      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+  }
+
+  .component-glassy-button .liquidGlass-text {
+    z-index: 3;
+    font-size: 1rem;
+    color: white;
+  }
+
+  .component-glassy-button .menu,
+  .component-glassy-button .menu > div {
+    padding: 0.3rem;
+    border-radius: 1.2rem;
+  }
+
+  .component-glassy-button .menu:hover {
+    padding: 0.4rem;
+    border-radius: 1.2rem;
+  }
+
+  .component-glassy-button .menu .liquidGlass-text > div {
+    font-size: 14px;
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.6rem;
+    transition: all 0.1s ease-in;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .component-glassy-button .menu .liquidGlass-text > div:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: inset -2px -2px 2px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+  }
+
+  .component-glassy-button .dock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 1.5rem;
+    padding: 0.4rem;
+  }
+
+  .component-glassy-button .dock,
+  .component-glassy-button .dock > div {
+    border-radius: 1.5rem;
+  }
+
+  .component-glassy-button .dock:hover {
+    padding: 0.5rem;
+    border-radius: 1.8rem;
+  }
+
+  .component-glassy-button .dock:hover > div {
+    border-radius: 1.8rem;
+  }
+
+  .component-glassy-button .dock-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .component-glassy-button .dock-icon {
+    font-size: 32px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    cursor: pointer;
+  }
+
+  .component-glassy-button .dock-icon:hover {
+    transform: scale(1.15) translateY(-6px);
+  }
+
+  .component-glassy-button .button {
+    padding: 0.8rem 1.8rem;
+    border-radius: 2rem;
+  }
+
+  .component-glassy-button .button,
+  .component-glassy-button .button > div {
+    border-radius: 2rem;
+  }
+
+  .component-glassy-button .button:hover {
+    padding: 1rem 2rem;
+  }
+
+  .component-glassy-button .button:hover > div {
+    border-radius: 2.5rem;
+  }
+
+  .component-glassy-button .button-text {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  }
+
+  .component-glassy-button .button:hover .button-text {
+    transform: scale(0.95);
+  }
+</style>
