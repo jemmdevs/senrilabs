@@ -1,0 +1,180 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Design Patterns - Web Interfaces">
+  <Navbar client:idle />
+  
+  <main class="lg:ml-64 min-h-screen bg-white">
+    <!-- Header -->
+    <section class="px-6 lg:px-16 pt-20 lg:pt-16 pb-12 lg:pb-16 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-black transition-colors mb-6">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </a>
+        <h1 class="main-text gradient-text mb-4">
+          Design Patterns
+        </h1>
+        <p class="text-lg lg:text-xl text-gray-600">
+          Proven solutions to common design problems in web interfaces.
+        </p>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-6">Understanding Design Patterns</h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+          Design patterns are reusable solutions to common problems. They represent best practices that have evolved 
+          through years of user research, testing, and iteration. By understanding and applying these patterns, 
+          you can create interfaces that feel familiar and intuitive to users.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          Patterns aren't rigid rules—they're starting points that can be adapted to fit your specific context 
+          and user needs. The key is understanding why patterns work before deciding when and how to apply them.
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Common Patterns -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">Essential Patterns</h2>
+        
+        <div class="space-y-10">
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">1. Navigation Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              From hamburger menus to mega menus, navigation patterns help users move through your site. 
+              Learn when to use persistent navigation, breadcrumbs, tabs, and other wayfinding solutions.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">2. Form Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Effective form design reduces friction and increases completion rates. Explore patterns for input 
+              fields, validation, error handling, multi-step forms, and progressive disclosure.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">3. Content Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              How you organize and present content impacts engagement and comprehension. Study card layouts, 
+              masonry grids, list views, and other content organization patterns.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">4. Feedback Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Users need to know what's happening. Examine patterns for loading states, progress indicators, 
+              success messages, error handling, and system feedback.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">5. Search Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              From simple search boxes to advanced filtering interfaces, search patterns help users find what 
+              they need. Learn about autocomplete, filters, faceted search, and results presentation.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">6. Onboarding Patterns</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              First impressions matter. Explore patterns for introducing features, guiding new users, and 
+              creating effective tutorials without overwhelming people.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Implementation Guidelines -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">Using Patterns Effectively</h2>
+        
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Understand Context</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              A pattern that works in one context may not work in another. Consider your users, their goals, 
+              and the specific problem you're solving.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Don't Blindly Copy</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Understanding why a pattern works is more important than copying it exactly. Adapt patterns 
+              to fit your unique requirements.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Test with Users</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Even proven patterns should be validated with your specific audience. User testing reveals 
+              whether a pattern actually solves your users' problems.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Document Your Decisions</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              When you implement a pattern, document why you chose it and how it should be used. 
+              This creates consistency and helps teams make aligned decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* Main text - responsive sizing */
+  .main-text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  @media (min-width: 1024px) {
+    .main-text {
+      font-size: 42px;
+      line-height: 44px;
+    }
+  }
+
+  /* Gradient text - more subtle */
+  .gradient-text {
+    background: linear-gradient(to right, #6b7280, #374151, #1f2937);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+

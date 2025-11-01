@@ -1,0 +1,175 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Website Showcases - Web Interfaces">
+  <Navbar client:idle />
+  
+  <main class="lg:ml-64 min-h-screen bg-white">
+    <!-- Header -->
+    <section class="px-6 lg:px-16 pt-20 lg:pt-16 pb-12 lg:pb-16 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-black transition-colors mb-6">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </a>
+        <h1 class="main-text gradient-text mb-4">
+          Website Showcases
+        </h1>
+        <p class="text-lg lg:text-xl text-gray-600">
+          A curated collection of exceptional web design examples and what makes them effective.
+        </p>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-6">Learning from Excellence</h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+          Great web design doesn't happen in a vacuum. By studying exceptional websites, we can identify patterns, 
+          techniques, and principles that make interfaces effective, beautiful, and user-friendly.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          This showcase highlights outstanding examples of web design across different industries and styles. 
+          Each example is analyzed to reveal what makes it work and how you can apply similar principles.
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Showcase Categories -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">Featured Showcases</h2>
+        
+        <div class="space-y-10">
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">1. Minimalist Interfaces</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Exploring websites that embrace simplicity and clarity. These examples demonstrate how less can be more, 
+              using white space, typography, and subtle interactions to create elegant experiences.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">2. Interactive Experiences</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Websites that push the boundaries of interactivity. From scroll-triggered animations to immersive 
+              storytelling, these examples show how motion and interaction can enhance engagement.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">3. Editorial Design</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Publication and content-focused sites that excel at typography, layout, and readability. 
+              These examples demonstrate how to make long-form content engaging and accessible.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">4. E-commerce Excellence</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Online stores that balance aesthetics with conversion optimization. Learn how top e-commerce sites 
+              create trust, showcase products, and streamline the purchasing process.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">5. Portfolio & Personal Brands</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Creative portfolios that effectively showcase work and personality. These examples highlight how to 
+              create memorable personal brands through thoughtful design and unique presentations.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">6. Product Landing Pages</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Focused pages designed to convert visitors. Study how successful product pages use hierarchy, 
+              social proof, and clear calls-to-action to drive desired outcomes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Analysis Framework -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">How to Analyze</h2>
+        
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">First Impressions</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              What stands out immediately? How does the design establish hierarchy and guide your attention?
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">User Flow</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              How easy is it to accomplish key tasks? What friction points exist, and how might they be improved?
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Visual Language</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              What makes the aesthetic work? Consider typography, color, spacing, and overall style coherence.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Technical Implementation</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              How is it built? Look at performance, responsiveness, and technical choices that support the design.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* Main text - responsive sizing */
+  .main-text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  @media (min-width: 1024px) {
+    .main-text {
+      font-size: 42px;
+      line-height: 44px;
+    }
+  }
+
+  /* Gradient text - more subtle */
+  .gradient-text {
+    background: linear-gradient(to right, #6b7280, #374151, #1f2937);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+

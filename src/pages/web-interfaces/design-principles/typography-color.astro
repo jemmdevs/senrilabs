@@ -1,0 +1,176 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer.astro';
+---
+
+<Layout title="Typography & Color - Web Interfaces">
+  <Navbar client:idle />
+  
+  <main class="lg:ml-64 min-h-screen bg-white">
+    <!-- Header -->
+    <section class="px-6 lg:px-16 pt-20 lg:pt-16 pb-12 lg:pb-16 border-b border-gray-200">
+      <div class="max-w-4xl mx-auto">
+        <a href="/" class="inline-flex items-center text-gray-600 hover:text-black transition-colors mb-6">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back
+        </a>
+        <h1 class="main-text gradient-text mb-4">
+          Typography & Color
+        </h1>
+        <p class="text-lg lg:text-xl text-gray-600">
+          Exploring the principles of typography and color theory in web design.
+        </p>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-6">Design Principles</h2>
+        <p class="text-base lg:text-lg text-gray-700 mb-6 leading-relaxed">
+          Typography and color are foundational elements of web design. They work together to create hierarchy, 
+          establish mood, and guide users through digital experiences. Understanding these principles is essential 
+          for creating effective and beautiful interfaces.
+        </p>
+        <p class="text-base lg:text-lg text-gray-700 leading-relaxed">
+          This section explores best practices for choosing typefaces, creating type scales, establishing color palettes, 
+          and ensuring accessibility in your designs.
+        </p>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Core Concepts -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">Core Concepts</h2>
+        
+        <div class="space-y-10">
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">1. Typographic Hierarchy</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Create clear visual hierarchy through size, weight, and spacing. Use type scales to maintain consistency 
+              and ensure readability across different screen sizes and contexts.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">2. Color Psychology</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Colors evoke emotions and associations. Understanding color psychology helps you choose palettes that 
+              support your brand message and create the right emotional response in users.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">3. Contrast & Accessibility</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Ensure sufficient contrast between text and backgrounds to maintain readability. Follow WCAG guidelines 
+              to make your designs accessible to users with visual impairments.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">4. Responsive Typography</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Typography should adapt gracefully across devices. Use fluid type scales and responsive units to ensure 
+              text remains readable and proportional on all screen sizes.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">5. Color Systems</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Build systematic color palettes with primary, secondary, and semantic colors. Create clear naming conventions 
+              and document usage guidelines to maintain consistency across your design system.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-black mb-3">6. Performance Considerations</h3>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Optimize font loading strategies and choose web-safe fonts when possible. Balance aesthetic choices with 
+              performance to ensure fast page loads and smooth rendering.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+      <div class="border-t border-gray-200"></div>
+    </div>
+
+    <!-- Best Practices -->
+    <section class="px-6 lg:px-16 py-12 lg:py-16">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-2xl lg:text-3xl font-semibold text-black mb-8">Best Practices</h2>
+        
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Limit Font Families</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Use 2-3 font families maximum. Too many typefaces create visual noise and slow down page load times.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Establish Line Length</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Maintain optimal line length of 45-75 characters for readability. Use max-width constraints on text containers.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Test Color Combinations</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Always test color combinations for accessibility. Use tools to verify contrast ratios meet WCAG standards.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-black mb-2">Use Color Purposefully</h4>
+            <p class="text-base text-gray-700 leading-relaxed">
+              Don't rely solely on color to convey information. Combine color with icons, text, or patterns for clarity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* Main text - responsive sizing */
+  .main-text {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+  }
+
+  @media (min-width: 1024px) {
+    .main-text {
+      font-size: 42px;
+      line-height: 44px;
+    }
+  }
+
+  /* Gradient text - more subtle */
+  .gradient-text {
+    background: linear-gradient(to right, #6b7280, #374151, #1f2937);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+</style>
+

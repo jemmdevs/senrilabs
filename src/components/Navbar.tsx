@@ -145,39 +145,25 @@ const Navbar = () => {
   };
 
   const humanInterfaceItems: NavItem[] = [
-    {
-      name: 'Cognitive Design',
-      href: '/cognitive-design',
-      subItems: [
-        { name: 'Components', href: '/cognitive-design/components' },
-        { name: 'Guidelines', href: '/cognitive-design/guidelines' },
-      ],
-    },
-    {
-      name: 'Spatial Interfaces',
-      href: '/spatial-interfaces',
-      subItems: [
-        { name: 'Components', href: '/spatial-interfaces/components' },
-        { name: 'Guidelines', href: '/spatial-interfaces/guidelines' },
-      ],
-    },
+    { name: 'Components', href: '/human-interface/components' },
+    { name: 'Philosophy', href: '/human-interface/philosophy' },
   ];
 
   const webInterfacesItems: NavItem[] = [
     {
-      name: 'Utility UI',
-      href: '/utility-ui',
+      name: 'Design Principles',
+      href: '#',
       subItems: [
-        { name: 'Components', href: '/utility-ui/components' },
-        { name: 'Guidelines', href: '/utility-ui/guidelines' },
+        { name: 'Typography & Color', href: '/web-interfaces/design-principles/typography-color' },
+        { name: 'Layout & Composition', href: '/web-interfaces/design-principles/layout-composition' },
       ],
     },
     {
-      name: 'Expressive UI',
-      href: '/expressive-ui',
+      name: 'Inspiration & Analysis',
+      href: '#',
       subItems: [
-        { name: 'Components', href: '/expressive-ui/components' },
-        { name: 'Guidelines', href: '/expressive-ui/guidelines' },
+        { name: 'Website Showcases', href: '/web-interfaces/inspiration-analysis/website-showcases' },
+        { name: 'Design Patterns', href: '/web-interfaces/inspiration-analysis/design-patterns' },
       ],
     },
   ];
@@ -204,18 +190,22 @@ const Navbar = () => {
           <a
             href={item.href}
             onClick={(e) => {
-              if (isMobile && item.subItems) {
-                // If submenu is already open, allow navigation
-                if (isActive) {
-                  setIsMobileMenuOpen(false);
+              if (item.subItems) {
+                if (isMobile) {
+                  // In mobile, toggle submenu
+                  if (isActive) {
+                    setIsMobileMenuOpen(false);
+                  } else {
+                    e.preventDefault();
+                    handleItemClick(section, item.name);
+                  }
                 } else {
-                  // If submenu is closed, open it
+                  // In desktop, prevent navigation for items with subItems
                   e.preventDefault();
-                  handleItemClick(section, item.name);
                 }
               }
             }}
-            className="inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200"
+            className={`inline-block text-sm text-black hover:text-gray-500 transition-colors duration-200 ${!isMobile && item.subItems ? 'cursor-default' : ''}`}
           >
             {item.name}
           </a>
