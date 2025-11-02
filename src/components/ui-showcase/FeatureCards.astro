@@ -13,8 +13,8 @@ export const showcaseConfig = {
 };
 ---
 
-<div class="spotlight-container">
-  <ul class="spotlight-grid" id="spotlight-grid">
+<div class="featureCards-container">
+  <ul class="featureCards-grid" id="featureCards-grid">
     <li>
       <article>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -63,13 +63,13 @@ export const showcaseConfig = {
 </div>
 
 <style>
-  .spotlight-container {
+  .featureCards-container {
     width: 100%;
     max-width: 60ch;
     position: relative;
   }
 
-  .spotlight-grid {
+  .featureCards-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     list-style-type: none;
@@ -78,13 +78,13 @@ export const showcaseConfig = {
     position: relative;
   }
 
-  .spotlight-grid li {
+  .featureCards-grid li {
     padding: 1rem;
     list-style-type: none;
   }
 
   /* Spotlight effect background */
-  .spotlight-grid::after {
+  .featureCards-grid::after {
     content: "";
     position: absolute;
     background: hsl(0 0% 10%);
@@ -100,7 +100,7 @@ export const showcaseConfig = {
     opacity: 0;
   }
 
-  .spotlight-grid[data-active]::after {
+  .featureCards-grid[data-active]::after {
     opacity: 1;
     transition: opacity 0.2s 0.2s, inset 0.2s;
   }
@@ -130,12 +130,12 @@ export const showcaseConfig = {
     pointer-events: none;
   }
 
-  .spotlight-grid li:hover article::before {
+  .featureCards-grid li:hover article::before {
     opacity: 1;
   }
 
   /* Clase para activar el efecto en móvil con click */
-  .spotlight-grid li.active article::before {
+  .featureCards-grid li.active article::before {
     opacity: 1;
   }
 
@@ -168,31 +168,31 @@ export const showcaseConfig = {
     transition: stroke 0.2s;
   }
 
-  .spotlight-grid li:hover article svg path {
+  .featureCards-grid li:hover article svg path {
     --active: 1;
   }
 
   /* Clase para activar el efecto en móvil con click */
-  .spotlight-grid li.active article svg path {
+  .featureCards-grid li.active article svg path {
     --active: 1;
   }
 
   /* Individual card colors */
-  .spotlight-grid li:nth-of-type(1) { --hue: 30; }
-  .spotlight-grid li:nth-of-type(2) { --hue: 280; }
-  .spotlight-grid li:nth-of-type(3) { --hue: 210; }
-  .spotlight-grid li:nth-of-type(4) { --hue: 120; }
+  .featureCards-grid li:nth-of-type(1) { --hue: 30; }
+  .featureCards-grid li:nth-of-type(2) { --hue: 280; }
+  .featureCards-grid li:nth-of-type(3) { --hue: 210; }
+  .featureCards-grid li:nth-of-type(4) { --hue: 120; }
 
   /* Responsive */
   @media (max-width: 640px) {
-    .spotlight-grid {
+    .featureCards-grid {
       grid-template-columns: 1fr;
     }
   }
 </style>
 
 <script>
-  const grid = document.getElementById('spotlight-grid');
+  const grid = document.getElementById('featureCards-grid');
   if (grid) {
     let current: HTMLElement | null = null;
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
