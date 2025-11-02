@@ -134,6 +134,11 @@ export const showcaseConfig = {
     opacity: 1;
   }
 
+  /* Clase para activar el efecto en móvil con click */
+  .spotlight-grid li.active article::before {
+    opacity: 1;
+  }
+
   article h3 {
     margin: 0;
     font-weight: 400;
@@ -167,6 +172,11 @@ export const showcaseConfig = {
     --active: 1;
   }
 
+  /* Clase para activar el efecto en móvil con click */
+  .spotlight-grid li.active article svg path {
+    --active: 1;
+  }
+
   /* Individual card colors */
   .spotlight-grid li:nth-of-type(1) { --hue: 30; }
   .spotlight-grid li:nth-of-type(2) { --hue: 280; }
@@ -185,6 +195,7 @@ export const showcaseConfig = {
   const grid = document.getElementById('spotlight-grid');
   if (grid) {
     let current: HTMLElement | null = null;
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     const sync = () => {
       if (current) {
@@ -214,8 +225,47 @@ export const showcaseConfig = {
       grid.removeAttribute('data-active');
     };
 
-    grid.addEventListener('pointermove', update);
-    grid.addEventListener('pointerleave', handleLeave);
+    // Para dispositivos táctiles (móvil)
+    if (isTouchDevice) {
+      const articles = grid.querySelectorAll('li');
+      
+      articles.forEach((li) => {
+        li.addEventListener('click', (e) => {
+          e.preventDefault();
+          const article = li.querySelector('article') as HTMLElement;
+          
+          if (li.classList.contains('active')) {
+            // Si ya está activo, desactivar
+            li.classList.remove('active');
+            current = null;
+            grid.removeAttribute('data-active');
+          } else {
+            // Desactivar todos los demás
+            articles.forEach(otherLi => otherLi.classList.remove('active'));
+            
+            // Activar el nuevo
+            li.classList.add('active');
+            current = article;
+            grid.setAttribute('data-active', '');
+            sync();
+          }
+        });
+      });
+
+      // Cerrar al hacer click fuera
+      document.addEventListener('click', (e) => {
+        if (!grid.contains(e.target as Node)) {
+          articles.forEach(li => li.classList.remove('active'));
+          current = null;
+          grid.removeAttribute('data-active');
+        }
+      });
+    } else {
+      // Para dispositivos con mouse (desktop)
+      grid.addEventListener('pointermove', update);
+      grid.addEventListener('pointerleave', handleLeave);
+    }
+
     window.addEventListener('resize', sync);
   }
 </script>
