@@ -3,8 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer.astro';
 import ComponentShowcase from '@/components/ui-showcase/ComponentShowcase.astro';
-import GlassyButton from '@/components/ui-showcase/GlassyButton.astro';
-import FeatureCards from '@/components/ui-showcase/FeatureCards.astro';
+import GlassyButton, { showcaseConfig as glassyButtonConfig } from '@/components/ui-showcase/GlassyButton.astro';
+import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components/ui-showcase/FeatureCards.astro';
 
 
 ---
@@ -28,7 +28,7 @@ import FeatureCards from '@/components/ui-showcase/FeatureCards.astro';
         title="Glassy button"
         date="Oct 28, 2025"
         description="A translucent button with frosted glass effect and smooth interactions, inspired by Apple's Liquid Glass design language."
-        backgroundImage="/applebg.jpeg"
+        {...glassyButtonConfig}
       >
         <GlassyButton />
       </ComponentShowcase>
@@ -39,6 +39,7 @@ import FeatureCards from '@/components/ui-showcase/FeatureCards.astro';
         title="Feature Cards"
         date="Nov 2, 2025"
         description="Interactive cards with dynamic hover effects and smooth transitions. The background follows your cursor across the grid."
+        {...featureCardsConfig}
       >
         <FeatureCards />
       </ComponentShowcase>
