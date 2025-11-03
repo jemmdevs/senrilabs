@@ -11,13 +11,13 @@ import Footer from '@/components/Footer.astro';
     <!-- Header -->
     <section class="px-6 lg:px-16 pt-20 lg:pt-16 pb-12 lg:pb-16 border-b border-gray-200">
       <div class="max-w-4xl mx-auto">
-        <a href="/" class="inline-flex items-center text-gray-600 hover:text-black transition-colors mb-6">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
+        <a 
+          href="/" 
+          class="inline-block text-[14px] text-[#9ca3af] hover:text-black underline transition-colors mb-6"
+        >
           Back
         </a>
-        <h1 class="main-text gradient-text mb-4">
+        <h1 class="main-text text-black mb-4">
           Design Patterns
         </h1>
         <p class="text-lg lg:text-xl text-gray-600">
@@ -168,13 +168,4 @@ import Footer from '@/components/Footer.astro';
       line-height: 44px;
     }
   }
-
-  /* Gradient text - more subtle */
-  .gradient-text {
-    background: linear-gradient(to right, #6b7280, #374151, #1f2937);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
 </style>
-
