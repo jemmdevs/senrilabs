@@ -6,6 +6,7 @@ import ComponentShowcase from '@/components/ui-showcase/ComponentShowcase.astro'
 import GlassyButton, { showcaseConfig as glassyButtonConfig } from '@/components/ui-showcase/GlassyButton.astro';
 import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components/ui-showcase/FeatureCards.astro';
 import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components/ui-showcase/SwitchButton.astro';
+import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/components/ui-showcase/NotificationStack.astro';
 
 
 ---
@@ -48,13 +49,24 @@ import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components
      <!-- iOS Switch Component -->
       <ComponentShowcase
         id="ios-switch"
-      title="iOS Switch"
-      date="Nov 14, 2025"
-      description="Realistic iOS-style toggle switches with drag/swipe support and multiple color themes."
+        title="iOS Switch"
+        date="Nov 14, 2025"
+       description="Realistic iOS-style toggle switches with drag/swipe support and multiple color themes."
        {...switchButtonConfig}
->
+      >
       <SwitchButton />
     </ComponentShowcase>
+      
+    <!-- En el main, donde van los componentes -->
+    <ComponentShowcase
+      id="notification-stack"
+      title="Notification Stack"
+      date="Nov 14, 2025"
+      description="iOS-style notification system with stacking effect, glassmorphism, and smooth animations. Hover to expand the stack."
+      {...notificationStackConfig}
+     >
+     <NotificationStack />
+  </ComponentShowcase>
     </div>
 
     <!-- Side Navigation Menu (Right) - Hidden on mobile -->
@@ -69,12 +81,16 @@ import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components
         <a href="#ios-switch" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="ios-switch">
           iOS Switch
         </a>
+        <a href="#notification-stack" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="notification-stack">
+          Notification Stack
+        </a>
         <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="dropdown-menu">
           Dropdown Menu
         </a>
         <a href="#notification-card" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="notification-card">
           Notification Card
         </a>
+        
       
       </nav>
     </aside>
