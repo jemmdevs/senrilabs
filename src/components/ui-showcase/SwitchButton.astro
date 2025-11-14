@@ -1,0 +1,529 @@
+---
+// ============================================
+// iOS Switch Component - Switches estilo iOS con drag/swipe
+// ============================================
+
+// CONFIGURACIÓN DEL SHOWCASE
+export const showcaseConfig = {
+  backgroundColor: '#f5f5f7', // Fondo gris claro estilo Apple
+};
+---
+
+<div class="iosSwitch-wrapper">
+  <div class="iosSwitch-container">
+    <div class="iosSwitch-examples">
+      <label class="iosSwitch iosSwitch-sm" data-tint="green" data-switch="small">
+        <input type="checkbox" checked>
+        <span></span>
+        Small
+      </label>
+
+      <label class="iosSwitch" data-tint="green" data-switch="medium">
+        <input type="checkbox" checked>
+        <span></span>
+        Medium
+      </label>
+
+      <label class="iosSwitch iosSwitch-lg" data-tint="green" data-switch="large">
+        <input type="checkbox" checked>
+        <span></span>
+        Large
+      </label>
+    </div>
+  </div>
+
+  <div class="iosSwitch-controls">
+    <div class="iosSwitch-control-group">
+      <label class="iosSwitch-control-label">Color</label>
+      <div class="iosSwitch-colorOptions">
+        <button class="iosSwitch-colorOption active" data-color="green" aria-label="Green color">
+          <span class="iosSwitch-colorDot" style="background: rgb(76, 217, 100);"></span>
+        </button>
+        <button class="iosSwitch-colorOption" data-color="blue" aria-label="Blue color">
+          <span class="iosSwitch-colorDot" style="background: rgb(0, 122, 255);"></span>
+        </button>
+        <button class="iosSwitch-colorOption" data-color="pink" aria-label="Pink color">
+          <span class="iosSwitch-colorDot" style="background: rgb(255, 45, 85);"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="iosSwitch-control-group">
+      <label class="iosSwitch-control-label">Disable</label>
+      <div class="iosSwitch-disableOptions">
+        <button class="iosSwitch-disableOption" data-target="small">Small</button>
+        <button class="iosSwitch-disableOption" data-target="medium">Medium</button>
+        <button class="iosSwitch-disableOption" data-target="large">Large</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .iosSwitch-wrapper {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 60ch;
+    position: relative;
+  }
+
+  .iosSwitch-container {
+    flex: 1;
+  }
+
+  .iosSwitch-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Controls sidebar */
+  .iosSwitch-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 120px;
+  }
+
+  .iosSwitch-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .iosSwitch-control-label {
+    font-size: 0.75rem;
+    color: #86868b;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Color options */
+  .iosSwitch-colorOptions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .iosSwitch-colorOption {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: #f5f5f7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    padding: 0;
+  }
+
+  .iosSwitch-colorOption:hover {
+    transform: scale(1.1);
+    background: #ebebed;
+  }
+
+  .iosSwitch-colorOption.active {
+    border-color: #1d1d1f;
+    background: #ffffff;
+  }
+
+  .iosSwitch-colorDot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+
+  .iosSwitch-colorOption:hover .iosSwitch-colorDot {
+    transform: scale(1.15);
+  }
+
+  /* Disable options */
+  .iosSwitch-disableOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .iosSwitch-disableOption {
+    padding: 0.5rem 0.75rem;
+    background: #ffffff;
+    border: 1px solid #d2d2d7;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    color: #1d1d1f;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    text-align: left;
+  }
+
+  .iosSwitch-disableOption:hover {
+    background: #f5f5f7;
+    border-color: #b8b8bd;
+    transform: translateX(2px);
+  }
+
+  .iosSwitch-disableOption.active {
+    background: #1d1d1f;
+    color: #ffffff;
+    border-color: #1d1d1f;
+  }
+
+  /* Switch base styles */
+  .iosSwitch input {
+    display: none;
+  }
+
+  .iosSwitch * {
+    box-sizing: border-box;
+    vertical-align: middle;
+  }
+
+  .iosSwitch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+    color: #1d1d1f;
+    font-size: 0.9375rem;
+  }
+
+  .iosSwitch:hover {
+    background: #ffffff;
+  }
+
+  .iosSwitch.disabled {
+    opacity: 0.5;
+    /* Mantenemos el cursor: pointer para que sea clickeable */
+    cursor: pointer; 
+  }
+
+  /* REGLA ELIMINADA:
+  .iosSwitch.disabled:hover {
+    background: transparent; 
+  }
+  */
+
+  .iosSwitch span {
+    display: inline-block;
+    width: 48px;
+    height: 30px;
+    position: relative;
+    border-radius: 15px;
+    border: 1px solid #cecece;
+    transition: all 0.6s linear;
+    flex-shrink: 0;
+  }
+
+  .iosSwitch input:checked ~ span {
+    background: rgb(76, 217, 100);
+    transition: all 0.2s ease;
+    border-color: rgb(76, 217, 100);
+  }
+
+  .iosSwitch span:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 15px;
+    background: #fff;
+    transition: all 0.4s ease;
+  }
+
+  .iosSwitch span:after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.20), 
+                0px 0px 2px 0px rgba(0, 0, 0, 0.60);
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    transition: all 0.2s linear;
+  }
+
+  .iosSwitch input:checked ~ span:after {
+    transform: translate3d(18px, 0, 0);
+  }
+
+  .iosSwitch input:checked ~ span:before {
+    transform: scale3d(0, 0, 0);
+  }
+
+  /* Stretch effect */
+  .iosSwitch input:active ~ span:after {
+    width: 33px;
+  }
+
+  .iosSwitch input:checked:active ~ span:after {
+    transform: translate3d(11px, 0, 0);
+  }
+
+  /* Disabled stretch prevention */
+  .iosSwitch.disabled input:active ~ span:after {
+    width: 26px;
+  }
+
+  .iosSwitch.disabled input:checked:active ~ span:after {
+    transform: translate3d(18px, 0, 0);
+  }
+
+  /* Color themes */
+  .iosSwitch[data-tint="green"] input:checked ~ span {
+    background: rgb(76, 217, 100);
+    border-color: rgb(76, 217, 100);
+  }
+
+  .iosSwitch[data-tint="blue"] input:checked ~ span {
+    background: rgb(0, 122, 255);
+    border-color: rgb(0, 122, 255);
+  }
+
+  .iosSwitch[data-tint="pink"] input:checked ~ span {
+    background: rgb(255, 45, 85);
+    border-color: rgb(255, 45, 85);
+  }
+
+  /* Small size */
+  .iosSwitch-sm span {
+    width: 36px;
+    height: 22.5px;
+    border-radius: 11.25px;
+  }
+
+  .iosSwitch-sm span:before {
+    border-radius: 11.25px;
+  }
+
+  .iosSwitch-sm span:after {
+    width: 19.5px;
+    height: 19.5px;
+    border-radius: 9.75px;
+  }
+
+  .iosSwitch-sm input:checked ~ span:after {
+    transform: translate3d(13.5px, 0, 0);
+  }
+
+  .iosSwitch-sm input:active ~ span:after {
+    width: 24.75px;
+  }
+
+  .iosSwitch-sm input:checked:active ~ span:after {
+    transform: translate3d(8.25px, 0, 0);
+  }
+
+  /* Large size */
+  .iosSwitch-lg span {
+    width: 60px;
+    height: 37.5px;
+    border-radius: 18.75px;
+  }
+
+  .iosSwitch-lg span:before {
+    border-radius: 18.75px;
+  }
+
+  .iosSwitch-lg span:after {
+    width: 32.5px;
+    height: 32.5px;
+    border-radius: 16.25px;
+  }
+
+  .iosSwitch-lg input:checked ~ span:after {
+    transform: translate3d(22.5px, 0, 0);
+  }
+
+  .iosSwitch-lg input:active ~ span:after {
+    width: 41.25px;
+  }
+
+  .iosSwitch-lg input:checked:active ~ span:after {
+    transform: translate3d(13.75px, 0, 0);
+  }
+
+  /* Disabled state */
+  .iosSwitch input[disabled] ~ span:before {
+    background: #f2f2f2;
+  }
+
+  .iosSwitch input[disabled] ~ span:after {
+    background: #f2f2f2;
+  }
+
+  /* Firefox fix */
+  @media all and (min--moz-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+    .iosSwitch input:active ~ span:after {
+      width: 26px;
+    }
+    
+    .iosSwitch input:checked:active ~ span:after {
+      transform: translate3d(18px, 0, 0);
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .iosSwitch-wrapper {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .iosSwitch-controls {
+      width: 100%;
+    }
+
+    .iosSwitch-colorOptions {
+      justify-content: flex-start;
+    }
+
+    .iosSwitch-examples {
+      gap: 1.25rem;
+    }
+
+    .iosSwitch {
+      font-size: 0.875rem;
+    }
+  }
+</style>
+
+<script>
+  const switches = document.querySelectorAll('.iosSwitch');
+  const switchSpans = document.querySelectorAll('.iosSwitch > span');
+  const colorOptions = document.querySelectorAll('.iosSwitch-colorOption');
+  const disableOptions = document.querySelectorAll('.iosSwitch-disableOption');
+
+  // Color selector handler
+  colorOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const color = option.getAttribute('data-color');
+        
+      // Update active state
+      colorOptions.forEach(opt => opt.classList.remove('active'));
+      option.classList.add('active');
+        
+      // Apply color to all switches
+      switches.forEach(switchEl => {
+        switchEl.setAttribute('data-tint', color || 'green');
+      });
+    });
+  });
+
+  // Disable toggle handler
+  disableOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const target = option.getAttribute('data-target');
+      const targetSwitch = document.querySelector(`.iosSwitch[data-switch="${target}"]`);
+      const input = targetSwitch?.querySelector('input');
+        
+      if (targetSwitch && input) {
+        const isActive = option.classList.contains('active');
+        
+        if (isActive) {
+          // Enable
+          option.classList.remove('active');
+          targetSwitch.classList.remove('disabled');
+          input.disabled = false;
+        } else {
+          // Disable
+          option.classList.add('active');
+          targetSwitch.classList.add('disabled');
+          input.disabled = true;
+        }
+      }
+    });
+  });
+  
+  // --- MODIFICACIÓN: Prevenir el cambio de estado con click en switches deshabilitados ---
+  switches.forEach(switchEl => {
+    switchEl.addEventListener('click', (e) => {
+      const input = switchEl.querySelector('input');
+      
+      if (input?.disabled) {
+        // Evita que el navegador cambie el estado del checkbox al hacer click en el label
+        e.preventDefault(); 
+        e.stopPropagation();
+      }
+    });
+  });
+  // --- FIN MODIFICACIÓN ---
+
+  // Enable draggable switching
+  let startX = 0;
+  let ghostNode: HTMLElement | null = null;
+
+  switchSpans.forEach(switchEl => {
+    (switchEl as HTMLElement).draggable = true;
+        
+    ['dragstart', 'touchstart'].forEach(eventType => {
+      switchEl.addEventListener(eventType, onDragStart);
+    });
+        
+    ['dragover', 'touchmove'].forEach(eventType => {
+      switchEl.addEventListener(eventType, onDragOver);
+    });
+        
+    ['dragend', 'touchend'].forEach(eventType => {
+      switchEl.addEventListener(eventType, onDragEnd);
+    });
+  });
+
+  function onDragStart(evt: Event) {
+    const e = evt as DragEvent | TouchEvent;
+    const x = 'pageX' in e ? e.pageX : (e as TouchEvent).touches?.[0]?.pageX || 0;
+    startX = x;
+        
+    if (evt.type === 'dragstart') {
+      const dragEvt = evt as DragEvent;
+      if (dragEvt.dataTransfer) {
+        dragEvt.dataTransfer.setData('text/plain', '');
+        ghostNode = document.createElement("div");
+        ghostNode.innerHTML = "&nbsp;";
+        ghostNode.style.visibility = 'hidden';
+        document.body.appendChild(ghostNode);
+        dragEvt.dataTransfer.setDragImage(ghostNode, 0, 0);
+      }
+    }
+  }
+
+  function onDragOver(evt: Event) {
+    const e = evt as DragEvent | TouchEvent;
+    e.preventDefault();
+        
+    const x = 'pageX' in e ? e.pageX : (e as TouchEvent).touches?.[0]?.pageX || 0;
+    const currentTarget = e.currentTarget as HTMLElement;
+    const checkbox = currentTarget.previousElementSibling as HTMLInputElement;
+        
+    if (checkbox?.disabled) {
+      return; // Previene el cambio de estado con drag/swipe
+    }
+        
+    if (checkbox?.checked && x <= startX - 10) {
+      checkbox.checked = false;
+    } else if (checkbox && !checkbox.checked && x >= startX + 10) {
+      checkbox.checked = true;
+    }
+  }
+
+  function onDragEnd(evt: Event) {
+    if (evt.type === 'dragend' && ghostNode?.parentNode) {
+      ghostNode.parentNode.removeChild(ghostNode);
+      ghostNode = null;
+    }
+  }
+</script>

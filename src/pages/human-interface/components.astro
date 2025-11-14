@@ -5,6 +5,7 @@ import Footer from '@/components/Footer.astro';
 import ComponentShowcase from '@/components/ui-showcase/ComponentShowcase.astro';
 import GlassyButton, { showcaseConfig as glassyButtonConfig } from '@/components/ui-showcase/GlassyButton.astro';
 import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components/ui-showcase/FeatureCards.astro';
+import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components/ui-showcase/SwitchButton.astro';
 
 
 ---
@@ -43,6 +44,17 @@ import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components
       >
         <FeatureCards />
       </ComponentShowcase>
+
+     <!-- iOS Switch Component -->
+      <ComponentShowcase
+        id="ios-switch"
+      title="iOS Switch"
+      date="Nov 14, 2025"
+      description="Realistic iOS-style toggle switches with drag/swipe support and multiple color themes."
+       {...switchButtonConfig}
+>
+      <SwitchButton />
+    </ComponentShowcase>
     </div>
 
     <!-- Side Navigation Menu (Right) - Hidden on mobile -->
@@ -54,12 +66,16 @@ import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components
         <a href="#feature-cards" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="feature-cards">
           Feature Cards
         </a>
+        <a href="#ios-switch" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="ios-switch">
+          iOS Switch
+        </a>
         <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="dropdown-menu">
           Dropdown Menu
         </a>
         <a href="#notification-card" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="notification-card">
           Notification Card
         </a>
+      
       </nav>
     </aside>
   </main>
