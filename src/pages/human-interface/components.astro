@@ -7,7 +7,7 @@ import GlassyButton, { showcaseConfig as glassyButtonConfig } from '@/components
 import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components/ui-showcase/FeatureCards.astro';
 import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components/ui-showcase/SwitchButton.astro';
 import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/components/ui-showcase/NotificationStack.astro';
-
+import ThemeSwitcher, { showcaseConfig as themeSwitcherConfig } from '@/components/ui-showcase/ThemeSwitcher.astro';
 
 ---
 
@@ -67,6 +67,18 @@ import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/
      >
      <NotificationStack />
   </ComponentShowcase>
+
+    <ComponentShowcase
+      id="theme-switcher"
+      title="Theme Switcher"
+      date="Nov 15, 2025"
+      description="Interactive theme switcher with liquid glass effect and three color schemes. Features smooth animations and minimal canvas patterns."
+      {...themeSwitcherConfig}
+     >
+     <ThemeSwitcher />
+  </ComponentShowcase>
+
+
     </div>
 
     <!-- Side Navigation Menu (Right) - Hidden on mobile -->
@@ -83,6 +95,9 @@ import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/
         </a>
         <a href="#notification-stack" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="notification-stack">
           Notification Stack
+        </a>
+        <a href="#theme-switcher" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="theme-switcher">
+          Theme Switcher
         </a>
         <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="dropdown-menu">
           Dropdown Menu

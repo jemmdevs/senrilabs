@@ -1,0 +1,543 @@
+---
+// Theme Switcher Component - Liquid Glass Effect
+
+// CONFIGURACIÓN DEL SHOWCASE
+export const showcaseConfig = {
+  backgroundColor: '#f5f5f7', // Color de fondo inicial (light theme - estilo Apple)
+};
+---
+
+<!-- Theme Switcher Container -->
+<div class="themeSwitcher-wrapper">
+  <!-- Canvas Background (ocupa todo) -->
+  <canvas id="themeSwitcher-canvas" class="themeSwitcher-canvas"></canvas>
+  
+  <!-- Switcher Component -->
+  <fieldset class="themeSwitcher-switcher">
+    <legend class="themeSwitcher-legend">Choose theme</legend>
+    
+    <label class="themeSwitcher-option">
+      <input class="themeSwitcher-input" type="radio" name="theme" value="light" data-option="1" checked />
+      <svg class="themeSwitcher-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" fill="var(--c)" />
+        <path stroke="var(--c)" stroke-width="2" stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+      </svg>
+    </label>
+    
+    <label class="themeSwitcher-option">
+      <input class="themeSwitcher-input" type="radio" name="theme" value="dark" data-option="2" />
+      <svg class="themeSwitcher-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path fill="var(--c)" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </label>
+    
+    <label class="themeSwitcher-option">
+      <input class="themeSwitcher-input" type="radio" name="theme" value="auto" data-option="3" />
+      <svg class="themeSwitcher-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" stroke="var(--c)" stroke-width="2" fill="none"/>
+        <path fill="var(--c)" d="M12 3a9 9 0 0 1 0 18z"/>
+      </svg>
+    </label>
+  </fieldset>
+</div>
+
+<style>
+  .themeSwitcher-wrapper {
+    --c-glass: #bbbbbc;
+    --c-light: #fff;
+    --c-dark: #000;
+    --c-content: #1d1d1f;
+    --c-bg: #f5f5f7;
+    --glass-reflex-dark: 1;
+    --glass-reflex-light: 1;
+    --saturation: 150%;
+    
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: var(--c-bg);
+    transition: background-color 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    isolation: isolate;
+  }
+
+  .themeSwitcher-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+    z-index: 0;
+    box-sizing: border-box;
+  }
+
+  .themeSwitcher-switcher {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 244px;
+    max-width: 244px;
+    height: 70px;
+    box-sizing: border-box;
+    padding: 8px 12px 10px;
+    margin: 0;
+    border: none;
+    border-radius: 99em;
+    background-color: color-mix(in srgb, var(--c-glass) 6%, transparent);
+    backdrop-filter: blur(20px) saturate(var(--saturation));
+    -webkit-backdrop-filter: blur(20px) saturate(var(--saturation));
+    box-shadow: 
+      inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+      inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+      inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+      inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+      inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+      inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+      inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+      inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+      0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+      0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    transition: background-color 400ms cubic-bezier(1, 0, 0.4, 1), box-shadow 400ms cubic-bezier(1, 0, 0.4, 1);
+  }
+
+  .themeSwitcher-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+  }
+
+  .themeSwitcher-input {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+  }
+
+  .themeSwitcher-option {
+    --c: var(--c-content);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    width: 68px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 99em;
+    opacity: 1;
+    transition: all 160ms;
+    cursor: pointer;
+  }
+
+  .themeSwitcher-option:hover {
+    --c: var(--c-content);
+  }
+
+  .themeSwitcher-option:hover .themeSwitcher-icon {
+    transform: scale(1.2);
+  }
+
+  .themeSwitcher-option:has(input:checked) {
+    cursor: auto;
+  }
+
+  .themeSwitcher-option:has(input:checked) .themeSwitcher-icon {
+    transform: scale(1);
+  }
+
+  .themeSwitcher-icon {
+    display: block;
+    width: 100%;
+    transition: transform 200ms cubic-bezier(0.5, 0, 0, 1);
+  }
+
+  /* Toggle indicator */
+  .themeSwitcher-switcher::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    display: block;
+    width: 84px;
+    height: calc(100% - 10px);
+    border-radius: 99em;
+    background-color: color-mix(in srgb, var(--c-glass) 18%, transparent);
+    z-index: -1;
+    box-shadow: 
+      inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+      inset 2px 1px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+      inset -1.5px -1px 0px -1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+      inset -2px -6px 1px -5px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+      inset -1px 2px 3px -1px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+      inset 0px -4px 1px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+      0px 3px 6px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    transition: translate 400ms cubic-bezier(1, 0, 0.4, 1), background-color 400ms cubic-bezier(1, 0, 0.4, 1), box-shadow 400ms cubic-bezier(1, 0, 0.4, 1);
+  }
+
+  .themeSwitcher-switcher:has(input[data-option="1"]:checked)::after {
+    translate: 0 0;
+    animation: themeSwitcher-scale1 440ms ease;
+  }
+
+  .themeSwitcher-switcher:has(input[data-option="2"]:checked)::after {
+    translate: 76px 0;
+    animation: themeSwitcher-scale2 440ms ease;
+  }
+
+  .themeSwitcher-switcher:has(input[data-option="3"]:checked)::after {
+    translate: 152px 0;
+    animation: themeSwitcher-scale3 440ms ease;
+  }
+
+  /* Dark theme */
+  .themeSwitcher-wrapper:has(input[value="dark"]:checked) {
+    --c-glass: #bbbbbc;
+    --c-light: #fff;
+    --c-dark: #000;
+    --c-content: #ffffff;
+    --c-bg: #000000;
+    --glass-reflex-dark: 2;
+    --glass-reflex-light: 0.3;
+    --saturation: 150%;
+  }
+
+  /* Auto theme (sistema) */
+  .themeSwitcher-wrapper:has(input[value="auto"]:checked) {
+    --c-light: #fff;
+    --c-dark: #000;
+    --c-glass: #bbbbbc;
+    --c-content: #ffffff;
+    --c-bg: #1a1a2e;
+    --glass-reflex-dark: 1;
+    --glass-reflex-light: 1;
+    --saturation: 120%;
+  }
+
+  @keyframes themeSwitcher-scale1 {
+    0% { transform: scale(1, 1); }
+    50% { transform: scale(1.1, 1); }
+    100% { transform: scale(1, 1); }
+  }
+
+  @keyframes themeSwitcher-scale2 {
+    0% { transform: scale(1, 1); }
+    50% { transform: scale(1.2, 1); }
+    100% { transform: scale(1, 1); }
+  }
+
+  @keyframes themeSwitcher-scale3 {
+    0% { transform: scale(1, 1); }
+    50% { transform: scale(1.1, 1); }
+    100% { transform: scale(1, 1); }
+  }
+
+  @media (max-width: 640px) {
+    .themeSwitcher-wrapper {
+      min-height: 300px;
+    }
+    
+    .themeSwitcher-switcher {
+      width: 200px;
+      height: 60px;
+    }
+    
+    .themeSwitcher-option {
+      width: 56px;
+      padding: 0 12px;
+    }
+    
+    .themeSwitcher-switcher::after {
+      width: 70px;
+    }
+    
+    .themeSwitcher-switcher:has(input[data-option="2"]:checked)::after {
+      translate: 63px 0;
+    }
+    
+    .themeSwitcher-switcher:has(input[data-option="3"]:checked)::after {
+      translate: 126px 0;
+    }
+  }
+</style>
+
+<script>
+      // [!] AÑADIDO: Implementación de Simplex Noise
+      // Esta es una librería compacta y auto-contenida para generar
+      // el efecto de "nubes" o "blobs" que viste en el video.
+      // (Basado en 'simplex-noise' de Jonas Wagner, Licencia MIT)
+      const SimplexNoise = (function() {
+        'use strict';
+        const F2 = 0.5 * (Math.sqrt(3.0) - 1.0);
+        const G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
+        const F3 = 1.0 / 3.0;
+        const G3 = 1.0 / 6.0;
+        const grad3 = new Float32Array([
+          1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0,
+          1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, -1,
+          0, 1, 1, 0, -1, 1, 0, 1, -1, 0, -1, -1
+        ]);
+    
+        class SimplexNoise {
+          p: Uint8Array;
+          perm: Uint8Array;
+          permMod12: Uint8Array;
+          
+          constructor(random?: () => number) {
+            if (typeof random !== 'function') {
+              random = Math.random;
+            }
+            this.p = new Uint8Array(256);
+            this.perm = new Uint8Array(512);
+            this.permMod12 = new Uint8Array(512);
+            for (let i = 0; i < 256; i++) {
+              this.p[i] = i;
+            }
+            this.shuffle(this.p, random);
+            for (let i = 0; i < 512; i++) {
+              this.perm[i] = this.p[i & 255];
+              this.permMod12[i] = this.perm[i] % 12 * 3;
+            }
+          }
+          shuffle(arr: Uint8Array, random: () => number) {
+            for (let i = arr.length - 1; i > 0; i--) {
+              const j = Math.floor(random() * (i + 1));
+              [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+          }
+          noise3D(xin: number, yin: number, zin: number) {
+            let n0, n1, n2, n3;
+            const s = (xin + yin + zin) * F3;
+            const i = Math.floor(xin + s);
+            const j = Math.floor(yin + s);
+            const k = Math.floor(zin + s);
+            const t = (i + j + k) * G3;
+            const X0 = i - t;
+            const Y0 = j - t;
+            const Z0 = k - t;
+            const x0 = xin - X0;
+            const y0 = yin - Y0;
+            const z0 = zin - Z0;
+            let i1, j1, k1;
+            let i2, j2, k2;
+            if (x0 >= y0) {
+              if (y0 >= z0) { i1 = 1; j1 = 0; k1 = 0; i2 = 1; j2 = 1; k2 = 0; }
+              else if (x0 >= z0) { i1 = 1; j1 = 0; k1 = 0; i2 = 1; j2 = 0; k2 = 1; }
+              else { i1 = 0; j1 = 0; k1 = 1; i2 = 1; j2 = 0; k2 = 1; }
+            } else {
+              if (y0 < z0) { i1 = 0; j1 = 0; k1 = 1; i2 = 0; j2 = 1; k2 = 1; }
+              else if (x0 < z0) { i1 = 0; j1 = 1; k1 = 0; i2 = 0; j2 = 1; k2 = 1; }
+              else { i1 = 0; j1 = 1; k1 = 0; i2 = 1; j2 = 1; k2 = 0; }
+            }
+            const x1 = x0 - i1 + G3;
+            const y1 = y0 - j1 + G3;
+            const z1 = z0 - k1 + G3;
+            const x2 = x0 - i2 + 2.0 * G3;
+            const y2 = y0 - j2 + 2.0 * G3;
+            const z2 = z0 - k2 + 2.0 * G3;
+            const x3 = x0 - 1.0 + 3.0 * G3;
+            const y3 = y0 - 1.0 + 3.0 * G3;
+            const z3 = z0 - 1.0 + 3.0 * G3;
+            const ii = i & 255;
+            const jj = j & 255;
+            const kk = k & 255;
+            const gi0 = this.permMod12[ii + this.perm[jj + this.perm[kk]]];
+            const gi1 = this.permMod12[ii + i1 + this.perm[jj + j1 + this.perm[kk + k1]]];
+            const gi2 = this.permMod12[ii + i2 + this.perm[jj + j2 + this.perm[kk + k2]]];
+            const gi3 = this.permMod12[ii + 1 + this.perm[jj + 1 + this.perm[kk + 1]]];
+            let t0 = 0.6 - x0 * x0 - y0 * y0 - z0 * z0;
+            if (t0 < 0) n0 = 0.0;
+            else { t0 *= t0; n0 = t0 * t0 * (grad3[gi0] * x0 + grad3[gi0 + 1] * y0 + grad3[gi0 + 2] * z0); }
+            let t1 = 0.6 - x1 * x1 - y1 * y1 - z1 * z1;
+            if (t1 < 0) n1 = 0.0;
+            else { t1 *= t1; n1 = t1 * t1 * (grad3[gi1] * x1 + grad3[gi1 + 1] * y1 + grad3[gi1 + 2] * z1); }
+            let t2 = 0.6 - x2 * x2 - y2 * y2 - z2 * z2;
+            if (t2 < 0) n2 = 0.0;
+            else { t2 *= t2; n2 = t2 * t2 * (grad3[gi2] * x2 + grad3[gi2 + 1] * y2 + grad3[gi2 + 2] * z2); }
+            let t3 = 0.6 - x3 * x3 - y3 * y3 - z3 * z3;
+            if (t3 < 0) n3 = 0.0;
+            else { t3 *= t3; n3 = t3 * t3 * (grad3[gi3] * x3 + grad3[gi3 + 1] * y3 + grad3[gi3 + 2] * z3); }
+            return 32.0 * (n0 + n1 + n2 + n3);
+          }
+        }
+        return SimplexNoise;
+      })();
+      // [!] Fin de la implementación de Simplex Noise
+    
+      // Canvas animated background
+      const canvas = document.getElementById('themeSwitcher-canvas') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      
+      // [!] AÑADIDO: Instancia del generador de ruido
+      const noise = new SimplexNoise(Math.random);
+    
+      if (ctx) {
+        const wrapper = document.querySelector('.themeSwitcher-wrapper') as HTMLElement;
+        let animationId: number;
+        let time = 0;
+        
+        // [!] MEJORADO: Set canvas size to fill container (con HiDPI/Retina)
+        const resizeCanvas = () => {
+          // Forzar tamaño exacto del wrapper
+          canvas.style.width = '100%';
+          canvas.style.height = '100%';
+          
+          const rect = wrapper.getBoundingClientRect();
+          const dpr = window.devicePixelRatio || 1;
+          
+          // Set canvas internal size (accounting for device pixel ratio)
+          canvas.width = Math.floor(rect.width * dpr);
+          canvas.height = Math.floor(rect.height * dpr);
+          
+          // Reset context scale after resize
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.scale(dpr, dpr);
+        };
+        
+        // Get current theme
+        const getCurrentTheme = () => {
+          return (document.querySelector('input[name="theme"]:checked') as HTMLInputElement)?.value || 'light';
+        };
+        
+        // [!] REEMPLAZADO: Configuraciones de tema para la nueva animación de puntos
+        const themes = {
+          light: {
+            baseDot: 'rgba(0, 0, 0, 0.1)',   // Puntos base tenues
+            activeDot: [0, 0, 0]             // [R, G, B] Puntos activos (negro)
+          },
+          dark: {
+            baseDot: 'rgba(255, 255, 255, 0.1)', // Puntos base tenues
+            activeDot: [255, 0, 0]             // [R, G, B] Puntos activos (ROJO, como el video)
+          },
+          auto: {
+            baseDot: 'rgba(255, 255, 255, 0.1)', // Puntos base tenues
+            activeDot: [138, 43, 226]           // [R, G, B] Puntos activos (violeta)
+          }
+        };
+        
+        // [!] REEMPLAZADO: Nueva función de dibujado (halftone + noise)
+        const draw = () => {
+          const theme = getCurrentTheme();
+          const colors = themes[theme as keyof typeof themes];
+          
+          // Usamos clientWidth/Height para el bucle (independiente del dpr)
+          const w = canvas.clientWidth;
+          const h = canvas.clientHeight;
+          
+          // Limpiar canvas (con el tamaño escalado)
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Configuración de la animación
+          const dotSize = 1.5;   // Radio de cada punto
+          const spacing = 8;     // Espaciado de la cuadrícula
+          const noiseScale = 0.002; // Zoom del ruido (más bajo = nubes más grandes)
+          const timeSpeed = 0.01;  // Velocidad de la animación (más lenta)
+    
+          const zTime = time * timeSpeed;
+          
+          for (let x = 0; x < w; x += spacing) {
+            for (let y = 0; y < h; y += spacing) {
+              
+              // Obtener valor de ruido 3D (x, y, tiempo)
+              // El valor va de -1 a 1
+              const noiseVal = noise.noise3D(x * noiseScale, y * noiseScale, zTime);
+              
+              // Mapear el valor de [-1, 1] a una intensidad de [0, 1]
+              const intensity = (noiseVal + 1) / 2;
+              
+              let color;
+              const threshold = 0.4; // Umbral para que un punto se "active"
+              
+              if (intensity > threshold) {
+                // Punto "activo"
+                // Mapear la intensidad de [threshold, 1] a [0, 1] para el alfa
+                const alpha = (intensity - threshold) / (1 - threshold);
+                const activeColor = colors.activeDot;
+                color = `rgba(${activeColor[0]}, ${activeColor[1]}, ${activeColor[2]}, ${alpha * 0.9})`;
+              } else {
+                // Punto "base" (la cuadrícula tenue)
+                color = colors.baseDot;
+              }
+              
+              ctx.fillStyle = color;
+              ctx.beginPath();
+              // Centramos el punto en la celda de la cuadrícula
+              ctx.arc(x + spacing / 2, y + spacing / 2, dotSize, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+          
+          time += 1; // Incrementamos el tiempo para el próximo frame
+          animationId = requestAnimationFrame(draw);
+        };
+        
+        // Initialize
+        resizeCanvas();
+        draw();
+        
+        // Handle theme changes
+        const radios = document.querySelectorAll('input[name="theme"]');
+        radios.forEach(radio => {
+          radio.addEventListener('change', () => {
+            // El bucle draw() detectará el cambio automáticamente
+          });
+        });
+        
+        // Handle resize
+        window.addEventListener('resize', () => {
+          resizeCanvas();
+        });
+        
+        // Cleanup
+        const stopAnimation = () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
+        };
+        
+        // Stop animation when navigating away
+        window.addEventListener('beforeunload', stopAnimation);
+      }
+      
+      // [!] MANTENIDO: Lógica original para la animación del toggle
+      // Track previous selection for toggle animations
+      const switcher = document.querySelector('.themeSwitcher-switcher');
+      const radios = document.querySelectorAll('input[name="theme"]');
+      let previousValue: string | null = null;
+      
+      const initiallyChecked = document.querySelector('input[name="theme"]:checked') as HTMLInputElement;
+      if (initiallyChecked) {
+        previousValue = initiallyChecked.getAttribute('data-option');
+        switcher?.setAttribute('data-previous', previousValue || '');
+      }
+      
+      radios.forEach((radio) => {
+        radio.addEventListener('change', () => {
+          if ((radio as HTMLInputElement).checked) {
+            switcher?.setAttribute('data-previous', previousValue || '');
+            previousValue = (radio as HTMLInputElement).getAttribute('data-option');
+          }
+        });
+      });
+    </script>
