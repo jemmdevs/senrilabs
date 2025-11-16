@@ -1,0 +1,132 @@
+---
+// ============================================
+// SECCIÓN 1: CONFIGURACIÓN (OBLIGATORIO)
+// ============================================
+import KanbanBoardComponent from '@/components/ui/KanbanBoardReact.tsx';
+
+// Exportar la configuración del showcase
+export const showcaseConfig = {
+  backgroundColor: '#F5F5F5', // Fondo claro para el Kanban
+};
+
+// Props del componente (si las necesitas en el futuro)
+interface Props {}
+
+const {} = Astro.props;
+---
+
+<!-- ============================================ -->
+<!-- SECCIÓN 2: HTML DEL COMPONENTE (OBLIGATORIO) -->
+<!-- ============================================ -->
+<div class="kanban-container">
+  <!-- Componente React con client:load para interactividad completa -->
+  <KanbanBoardComponent client:load />
+</div>
+
+<!-- ============================================ -->
+<!-- SECCIÓN 3: ESTILOS CSS (OBLIGATORIO) -->
+<!-- ============================================ -->
+<style>
+    .kanban-container {
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      min-height: 400px;
+    }
+  
+    /* Estilos globales para el Kanban */
+    :global(.kanban-wrapper) {
+      width: 100%;
+      padding: 0.5rem;
+    }
+  
+    :global(.kanban-board) {
+      min-height: auto;
+      gap: 0.75rem;
+    }
+  
+    /* Contenido de columnas con altura mínima */
+    :global([data-slot="kanban-column-content"]) {
+      min-height: 220px; /* Espacio visual para 3 tarjetas */
+    }
+  
+    /* Columnas con fondo #0C0A09 y altura mínima para 3 tarjetas */
+    :global(.kanban-column) {
+      min-height: 280px; /* Espacio para ~3 tarjetas + header */
+      height: fit-content;
+      transition: all 0.2s ease;
+      background-color: #0C0A09 !important;
+      border: 1px solid #1a1a1a !important;
+      color: white !important;
+    }
+  
+    /* Tarjetas con fondo #0C0A09 */
+    :global(.kanban-task-card) {
+      transition: all 0.2s ease;
+      cursor: grab;
+      background-color: #0C0A09 !important;
+      border: 1px solid #2a2a2a !important;
+      color: white !important;
+    }
+  
+    :global(.kanban-task-card:active) {
+      cursor: grabbing;
+    }
+  
+    /* Header de columna - texto blanco */
+    :global(.kanban-column .font-semibold) {
+      color: white !important;
+    }
+  
+    /* Badges en las columnas */
+    :global(.kanban-column [class*="badge"]) {
+      background-color: #1a1a1a !important;
+      color: white !important;
+    }
+  
+    /* Botones en las columnas */
+    :global(.kanban-column button) {
+      color: white !important;
+    }
+  
+    :global(.kanban-column button:hover) {
+      background-color: #1a1a1a !important;
+    }
+  
+    /* Texto en las tarjetas */
+    :global(.kanban-task-card span),
+    :global(.kanban-task-card time),
+    :global(.kanban-task-card .font-medium) {
+      color: white !important;
+    }
+  
+    /* Iconos SVG en blanco */
+    :global(.kanban-column svg),
+    :global(.kanban-task-card svg) {
+      color: white !important;
+      stroke: white !important;
+    }
+  
+    /* Responsive: columnas apiladas en móvil */
+    @media (max-width: 768px) {
+      :global(.kanban-board) {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  
+    @media (min-width: 769px) and (max-width: 1024px) {
+      :global(.kanban-board) {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+  
+    /* Animaciones suaves para drag & drop */
+    :global(.kanban-column[data-state="over"]) {
+      background-color: #1a1a1a !important;
+    }
+  
+    :global(.kanban-task-card:hover) {
+      box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.1), 0 2px 4px -1px rgba(255, 255, 255, 0.06);
+      background-color: #0a0a0a !important;
+    }
+  </style>

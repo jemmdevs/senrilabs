@@ -8,6 +8,7 @@ import FeatureCards, { showcaseConfig as featureCardsConfig } from '@/components
 import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components/ui-showcase/SwitchButton.astro';
 import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/components/ui-showcase/NotificationStack.astro';
 import ThemeSwitcher, { showcaseConfig as themeSwitcherConfig } from '@/components/ui-showcase/ThemeSwitcher.astro';
+import KanbanBoard, { showcaseConfig as kanbanBoardConfig } from '@/components/ui-showcase/KanbanBoard.astro';
 
 ---
 
@@ -78,6 +79,17 @@ import ThemeSwitcher, { showcaseConfig as themeSwitcherConfig } from '@/componen
      <ThemeSwitcher />
   </ComponentShowcase>
 
+  <!-- Kanban Board Component -->
+<ComponentShowcase
+id="kanban-board"
+title="Kanban Board"
+date="Nov 16, 2025"
+description="Drag-and-drop task management board with multiple columns. Move tasks between Backlog, In Progress, Review, and Done. Includes priorities, assignees, and due dates."
+{...kanbanBoardConfig}
+>
+<KanbanBoard />
+</ComponentShowcase>
+
 
     </div>
 
@@ -98,6 +110,9 @@ import ThemeSwitcher, { showcaseConfig as themeSwitcherConfig } from '@/componen
         </a>
         <a href="#theme-switcher" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="theme-switcher">
           Theme Switcher
+        </a>
+        <a href="#kanban-board" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="kanban-board">
+          Kanban Board
         </a>
         <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="dropdown-menu">
           Dropdown Menu
