@@ -87,7 +87,7 @@ function TaskColumn({ value, tasks, isOverlay, ...props }: TaskColumnProps) {
           <Badge variant="secondary">{tasks.length}</Badge>
         </div>
         <KanbanColumnHandle asChild>
-          <Button variant="dim" size="sm" mode="icon">
+        <Button variant="ghost" size="icon">
             <GripVertical />
           </Button>
         </KanbanColumnHandle>
