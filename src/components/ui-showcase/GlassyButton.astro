@@ -1,12 +1,10 @@
 ---
 // Glassy Button Component - Solo el contenido interactivo
-
 // CONFIGURACIÓN DEL SHOWCASE
 // Aquí defines el color de fondo o imagen del contenedor para este componente
 export const showcaseConfig = {
-   backgroundColor: '#000000', // Descomenta para usar color sólido
-  // backgroundImage: '/applebg.jpeg', // Usando imagen de fondo 
-  
+  backgroundColor: '#f5f5f7', // Fondo claro estilo iOS
+  // backgroundImage: '/applebg.jpeg', // Usando imagen de fondo
   // Solo usa uno de los dos: backgroundColor O backgroundImage, no ambos a la vez
 };
 ---
@@ -20,25 +18,26 @@ export const showcaseConfig = {
       <div class="liquidGlass-tint"></div>
       <div class="liquidGlass-shine"></div>
       <div class="liquidGlass-text">
+        <!-- Updated menu items with iOS-style icons and labels -->
         <div>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <path d="M8 3v10M3 8h10"/>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 2.5C5.5 2.5 3.5 4.5 3.5 7c0 1.8 1.1 3.3 2.6 4L6 14.5h4l-.1-3.5c1.5-.7 2.6-2.2 2.6-4 0-2.5-2-4.5-4.5-4.5zm0 1.5c1.7 0 3 1.3 3 3 0 1.2-.7 2.2-1.7 2.7l-.3.2v2.6H7V9.9l-.3-.2C5.7 9.2 5 8.2 5 7c0-1.7 1.3-3 3-3z"/>
           </svg>
-          New File
+          Tips
         </div>
         <div>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2H6L3 5v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
-            <path d="M3 5h3V2"/>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 3.5A1.5 1.5 0 0 1 3.5 2h9A1.5 1.5 0 0 1 14 3.5V8a.5.5 0 0 1-1 0V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H8a.5.5 0 0 1 0 1H3.5A1.5 1.5 0 0 1 2 12.5v-9z"/>
+            <path d="M14 9.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1 0-1h2.793l-4.147-4.146a.5.5 0 0 1 .708-.708L13.5 12.793V10a.5.5 0 0 1 .5-.5z"/>
           </svg>
-          Open
+          Share
         </div>
         <div>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="8" cy="8" r="6"/>
-            <path d="M8 5v3l2 2"/>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 4a.5.5 0 0 1 .5.5V6h1.5a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8z"/>
           </svg>
-          Settings
+          Add
         </div>
       </div>
     </div>
@@ -52,43 +51,86 @@ export const showcaseConfig = {
       <div class="liquidGlass-shine"></div>
       <div class="liquidGlass-text">
         <div class="dock-items">
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <rect x="8" y="12" width="24" height="18" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M8 18h24" stroke="currentColor" stroke-width="2.5"/>
+          <!-- Updated with iOS app icons: Safari, Messages, Photos, Music, Camera, Settings -->
+          <span class="dock-icon" style="--icon-color: #0A84FF;" data-icon="safari">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#safari-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <path d="M22 11v22M11 22h22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="22" cy="22" r="2" fill="white"/>
+              <defs>
+                <linearGradient id="safari-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#5AC8FA"/>
+                  <stop offset="100%" stop-color="#0A84FF"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M20 14v6l4 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <span class="dock-icon" style="--icon-color: #30D158;" data-icon="messages">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#messages-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <path d="M14 18c0-3.3 2.7-6 6-6h4c3.3 0 6 2.7 6 6v4c0 3.3-2.7 6-6 6h-1l-4 4v-4h-1c-3.3 0-6-2.7-6-6v-4z" fill="white" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="messages-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#34C759"/>
+                  <stop offset="100%" stop-color="#30D158"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="13" r="4" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M20 17v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M14 23c0-3.3 2.7-6 6-6s6 2.7 6 6v7h-12v-7z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <span class="dock-icon" style="--icon-color: #FF2D55;" data-icon="photos">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#photos-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <circle cx="18" cy="17" r="2.5" fill="white"/>
+              <path d="M12 28l6-8 4 5 3-4 5 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <rect x="11" y="13" width="22" height="18" rx="2" stroke="white" stroke-width="2" fill="none"/>
+              <defs>
+                <linearGradient id="photos-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#FF9500"/>
+                  <stop offset="50%" stop-color="#FF3B30"/>
+                  <stop offset="100%" stop-color="#FF2D55"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <rect x="10" y="8" width="20" height="24" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <path d="M15 14h10M15 20h10M15 26h6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <span class="dock-icon" style="--icon-color: #FF375F;" data-icon="music">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#music-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <circle cx="18" cy="27" r="3" fill="white"/>
+              <path d="M21 27V15l8-2v14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="29" cy="27" r="3" fill="white"/>
+              <defs>
+                <linearGradient id="music-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#FF6482"/>
+                  <stop offset="100%" stop-color="#FF375F"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <path d="M14 28l6-8 6 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <rect x="10" y="10" width="20" height="20" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+          <span class="dock-icon" style="--icon-color: #8E8E93;" data-icon="camera">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#camera-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="5" stroke="white" stroke-width="2.5" fill="none"/>
+              <rect x="12" y="15" width="20" height="14" rx="2" stroke="white" stroke-width="2" fill="none"/>
+              <path d="M18 15l1.5-3h5l1.5 3" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="camera-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#98989D"/>
+                  <stop offset="100%" stop-color="#636366"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
-          <span class="dock-icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="2.5" fill="none"/>
-              <circle cx="20" cy="20" r="3" fill="currentColor"/>
-              <path d="M20 10v4M20 26v4M10 20h4M26 20h4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <span class="dock-icon" style="--icon-color: #8E8E93;" data-icon="settings">
+            <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="20" fill="url(#settings-gradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+              <circle cx="22" cy="22" r="4" stroke="white" stroke-width="2.5" fill="none"/>
+              <path d="M22 13v3M22 28v3M31 22h-3M16 22h-3M28.5 15.5l-2 2M17.5 26.5l-2 2M28.5 28.5l-2-2M17.5 17.5l-2-2" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="settings-gradient" x1="22" y1="2" x2="22" y2="42">
+                  <stop offset="0%" stop-color="#98989D"/>
+                  <stop offset="100%" stop-color="#636366"/>
+                </linearGradient>
+              </defs>
             </svg>
           </span>
         </div>
@@ -117,7 +159,7 @@ export const showcaseConfig = {
 <style>
   .interactive-wrapper {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
@@ -138,8 +180,9 @@ export const showcaseConfig = {
   }
 
   .dock-container {
-    width: 320px;
-    height: 80px;
+    width: 380px;
+    height: 140px; /* Aumentado de 120px a 140px para dar más espacio */
+    padding: 20px 0; /* Padding vertical para evitar corte */
   }
 
   .button-container {
@@ -151,10 +194,14 @@ export const showcaseConfig = {
     position: relative;
     display: flex;
     font-weight: 600;
-    overflow: hidden;
-    color: white;
+    overflow: visible; /* Cambiado de hidden a visible para que no se corten los iconos */
+    /* Updated colors for light background */
+    color: #1d1d1f;
     cursor: pointer;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    /* Improved shadows for light mode */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+      0 8px 24px rgba(0, 0, 0, 0.06),
+      0 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     user-select: none;
     -webkit-user-select: none;
@@ -162,9 +209,18 @@ export const showcaseConfig = {
     -ms-user-select: none;
   }
 
+  .liquidGlass-wrapper:hover {
+    /* Enhanced hover effect */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1),
+      0 12px 32px rgba(0, 0, 0, 0.08),
+      0 2px 6px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+
   .liquidGlass-wrapper:active {
-    transform: scale(0.96);
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: scale(0.97) translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08),
+      0 6px 16px rgba(0, 0, 0, 0.06);
     transition: all 0.1s cubic-bezier(0.175, 0.885, 0.32, 1);
   }
 
@@ -172,7 +228,8 @@ export const showcaseConfig = {
     position: absolute;
     z-index: 0;
     inset: 0;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     filter: url(#glass-distortion);
     overflow: hidden;
     isolation: isolate;
@@ -182,7 +239,8 @@ export const showcaseConfig = {
     z-index: 1;
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.25);
+    /* Light mode glassmorphism tint */
+    background: rgba(255, 255, 255, 0.7);
   }
 
   .liquidGlass-shine {
@@ -190,47 +248,62 @@ export const showcaseConfig = {
     inset: 0;
     z-index: 2;
     overflow: hidden;
-    box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.5),
-      inset -1px -1px 1px 1px rgba(255, 255, 255, 0.5);
+    /* Adjusted shine for light mode */
+    box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.9),
+      inset -1px -1px 1px 0 rgba(0, 0, 0, 0.05);
   }
 
   .liquidGlass-text {
     z-index: 3;
     font-size: 1rem;
-    color: white;
+    /* Dark text for light background */
+    color: #1d1d1f;
   }
 
   /* Menu styles */
   .menu,
   .menu > div {
-    padding: 0.3rem;
-    border-radius: 1.2rem;
+    padding: 0.4rem;
+    border-radius: 1.3rem;
   }
 
   .menu:hover {
-    padding: 0.4rem;
-    border-radius: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 1.4rem;
   }
 
   .menu .liquidGlass-text > div {
     font-size: 14px;
-    color: white;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.6rem;
-    transition: all 0.1s ease-in;
+    color: #1d1d1f;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.7rem;
+    transition: all 0.15s ease-out;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    font-weight: 500;
   }
 
   .menu .liquidGlass-text > div svg {
     flex-shrink: 0;
+    opacity: 0.8;
   }
 
   .menu .liquidGlass-text > div:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: inset -2px -2px 2px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(2px);
+    /* iOS-style menu hover effect */
+    background: linear-gradient(
+      135deg,
+      rgba(0, 122, 255, 0.15) 0%,
+      rgba(0, 122, 255, 0.1) 100%
+    );
+    box-shadow: inset 0 1px 2px rgba(0, 122, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transform: scale(1.02);
+  }
+
+  .menu .liquidGlass-text > div:active {
+    transform: scale(0.98);
+    background: rgba(0, 122, 255, 0.2);
   }
 
   /* Dock styles */
@@ -238,51 +311,82 @@ export const showcaseConfig = {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    border-radius: 1.5rem;
-    padding: 0.4rem;
+    gap: 8px;
+    border-radius: 1.8rem;
+    padding: 0.6rem;
+    overflow: visible; /* Importante: asegurar que el contenido no se corte */
   }
 
   .dock,
   .dock > div {
-    border-radius: 1.5rem;
+    border-radius: 1.8rem;
   }
 
   .dock:hover {
-    padding: 0.5rem;
-    border-radius: 1.8rem;
+    padding: 0.7rem;
+    border-radius: 2rem;
   }
 
   .dock:hover > div {
-    border-radius: 1.8rem;
+    border-radius: 2rem;
   }
 
   .dock-items {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
   }
 
   .dock-icon {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    pointer-events: auto; /* Asegurar que los eventos de puntero funcionen */
+    padding: 4px; /* Área de interacción más grande para evitar flickering */
   }
 
+  /* Hover solo en desktop */
+  @media (hover: hover) and (pointer: fine) {
+    .dock-icon:hover {
+      transform: scale(1.25) translateY(-8px);
+    }
+
+    .dock-icon:hover svg {
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))
+        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    }
+  }
+
+  .dock-icon:active {
+    transform: scale(1.15) translateY(-4px);
+  }
+
+  /* Clase active para móvil */
+  .dock-icon.active {
+    transform: scale(1.25) translateY(-8px);
+  }
+
+  /* Enhanced iOS-style dock icons with glow */
   .dock-icon svg {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    transition: filter 0.3s ease;
+    display: block; /* Evitar espacios extra */
   }
 
-  .dock-icon:hover {
-    transform: scale(1.15) translateY(-6px);
+  .dock-icon.active svg {
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2))
+      drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
   }
 
   /* Button styles */
   .button {
-    padding: 0.8rem 1.8rem;
+    padding: 1rem 2rem;
     border-radius: 2rem;
   }
 
@@ -292,17 +396,17 @@ export const showcaseConfig = {
   }
 
   .button:hover {
-    padding: 1rem 2rem;
+    padding: 1.1rem 2.2rem;
   }
 
   .button:hover > div {
-    border-radius: 2.5rem;
+    border-radius: 2.2rem;
   }
 
   .button-text {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 600;
-    letter-spacing: 0.3px;
+    letter-spacing: -0.01em;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
     display: flex;
     align-items: center;
@@ -310,14 +414,94 @@ export const showcaseConfig = {
   }
 
   .button-text svg {
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .button:hover .button-text svg {
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 
   .button:hover .button-text {
-    transform: scale(0.95);
+    transform: scale(0.96);
+  }
+
+  /* Added responsive design */
+  @media (max-width: 640px) {
+    .dock-container {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      min-height: 140px;
+    }
+
+    .dock-items {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .interactive-wrapper {
+      gap: 16px;
+      align-items: center;
+    }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const dockIcons = document.querySelectorAll('.dock-icon');
+    let activeIcon: Element | null = null;
+
+    dockIcons.forEach((icon) => {
+      // Click para móvil
+      icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Si ya está activo, desactivar
+        if (activeIcon === icon) {
+          icon.classList.remove('active');
+          activeIcon = null;
+          return;
+        }
+
+        // Remover clase active de todos
+        dockIcons.forEach((i) => i.classList.remove('active'));
+
+        // Añadir active al clickeado
+        icon.classList.add('active');
+        activeIcon = icon;
+
+        // Remover después de la animación
+        setTimeout(() => {
+          icon.classList.remove('active');
+          if (activeIcon === icon) {
+            activeIcon = null;
+          }
+        }, 600);
+      });
+
+      // Prevenir el flickering en hover con un pequeño delay
+      let hoverTimeout: number;
+
+      icon.addEventListener('mouseenter', () => {
+        clearTimeout(hoverTimeout);
+      });
+
+      icon.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = window.setTimeout(() => {
+          // Pequeño delay para evitar flickering
+        }, 50);
+      });
+    });
+
+    // Cerrar active si se hace click fuera
+    document.addEventListener('click', (e) => {
+      const target = e.target as Element;
+      if (!target.closest('.dock-icon')) {
+        dockIcons.forEach((i) => i.classList.remove('active'));
+        activeIcon = null;
+      }
+    });
+  });
+</script>

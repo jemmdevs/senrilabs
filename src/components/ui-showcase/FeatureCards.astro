@@ -4,7 +4,7 @@
 // CONFIGURACIÓN DEL SHOWCASE
 // Aquí defines el color de fondo del contenedor para este componente
 export const showcaseConfig = {
-  backgroundColor: '#000000', // Color de fondo en formato hexadecimal
+  backgroundColor: '#f5f5f7', // Color de fondo en formato hexadecimal
   
   // Si quieres usar una imagen en lugar de color, comenta backgroundColor y descomenta backgroundImage:
   // backgroundImage: '/ruta/a/tu/imagen.jpg',
@@ -23,9 +23,6 @@ export const showcaseConfig = {
     background: {showcaseConfig.backgroundColor};
   "
 >
-  <!-- Cursor personalizado (solo dentro del wrapper) -->
-  <div class="custom-cursor"></div>
-
   <div class="featureCards-container">
     <ul class="featureCards-grid" id="featureCards-grid">
       <li>
@@ -79,33 +76,15 @@ export const showcaseConfig = {
   </div>
 </div>
 
-
-
 <style>
-  /* Wrapper con cursor personalizado */
+  /* Wrapper con cursor predeterminado */
   .featureCards-wrapper {
     position: relative;
-    cursor: none;
+    /* Se cambió 'cursor: none;' a 'cursor: auto;' */
+    cursor: auto; 
   }
 
-  /* Cursor personalizado - círculo pequeño que invierte colores */
-  .custom-cursor {
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: white;
-    mix-blend-mode: difference;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .custom-cursor.active {
-    opacity: 1;
-  }
+  /* Se eliminaron las reglas de .custom-cursor */
 
   .featureCards-container {
     width: 100%;
@@ -131,7 +110,7 @@ export const showcaseConfig = {
   .featureCards-grid::after {
     content: "";
     position: absolute;
-    background: hsl(0 0% 10%);
+    background: #ff6b35;
     border-radius: 1rem;
     pointer-events: none;
     z-index: 0;
@@ -145,13 +124,13 @@ export const showcaseConfig = {
   }
 
   .featureCards-grid[data-active]::after {
-    opacity: 1;
+    opacity: 0.15;
     transition: opacity 0.2s 0.2s, inset 0.2s;
   }
 
   /* Article card styles */
   article {
-    color: hsl(0 0% 80%);
+    color: hsl(0 0% 20%);
     padding: 0.75rem;
     display: grid;
     gap: 0.4rem;
@@ -159,28 +138,25 @@ export const showcaseConfig = {
     z-index: 1;
   }
 
-  /* Grid pattern overlay */
+  /* Grid pattern overlay - DESACTIVADO */
   article::before {
     content: "";
     position: absolute;
     inset: 0;
-    background:
-      linear-gradient(hsl(0 0% 2%) 0 2px, transparent 2px 38px) -20px -20px / 40px 40px,
-      linear-gradient(90deg, hsl(0 0% 2%) 0 2px, transparent 2px 38px) -20px -20px / 40px 40px;
-    mask: linear-gradient(-35deg, hsl(0 0% 2%) 0%, transparent 45%);
     z-index: -1;
     opacity: 0;
     transition: opacity 0.2s;
     pointer-events: none;
+    display: none;
   }
 
   .featureCards-grid li:hover article::before {
-    opacity: 1;
+    opacity: 0;
   }
 
   /* Clase para activar el efecto en móvil con click */
   .featureCards-grid li.active article::before {
-    opacity: 1;
+    opacity: 0;
   }
 
   article h3 {
@@ -192,7 +168,7 @@ export const showcaseConfig = {
   article p {
     margin: 0;
     text-wrap: pretty;
-    background: linear-gradient(hsl(0 0% 80%), hsl(0 0% 50%));
+    background: linear-gradient(hsl(0 0% 30%), hsl(0 0% 50%));
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
@@ -233,6 +209,7 @@ export const showcaseConfig = {
       cursor: auto;
     }
 
+    /* .custom-cursor ya fue eliminado, pero mantengo la media query para el caso de que alguien lo añada */
     .custom-cursor {
       display: none;
     }
@@ -244,11 +221,15 @@ export const showcaseConfig = {
 </style>
 
 <script>
+  // Obtener el elemento principal
   const grid = document.getElementById('featureCards-grid');
-  const cursor = document.querySelector('.custom-cursor') as HTMLElement;
-  
+
   if (grid) {
-    let current: HTMLElement | null = null;
+    // 1. CORRECCIÓN DE TIPO para 'current'
+    // Se declara con tipo explícito para que pueda ser null o un HTMLElement
+    let current: HTMLElement | null = null; 
+    
+    // Detección de dispositivo táctil
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     const sync = () => {
@@ -263,14 +244,21 @@ export const showcaseConfig = {
       }
     };
 
+    // CORRECCIÓN DE TIPO: Usamos PointerEvent para el mouse/touch
     const update = (e: PointerEvent) => {
-      const target = document.elementFromPoint(e.clientX, e.clientY);
-      const article = target?.closest('li')?.querySelector('article') as HTMLElement;
+      // Forzamos el tipo a Element (o null) ya que elementFromPoint puede devolver null
+      const target = document.elementFromPoint(e.clientX, e.clientY) as Element | null;
+      // Usamos HTMLElement ya que closest() devuelve un Element, y lo forzamos a li (HTMLElement)
+      const li = target?.closest('li') as HTMLElement | null;
       
-      if (article && article !== current) {
-        current = article;
-        grid.setAttribute('data-active', '');
-        sync();
+      if (li && li.parentElement === grid) {
+        // Forzamos el tipo a article (HTMLElement)
+        const article = li.querySelector('article') as HTMLElement | null;
+        if (article && article !== current) {
+          current = article;
+          grid.setAttribute('data-active', '');
+          sync();
+        }
       }
     };
 
@@ -279,53 +267,38 @@ export const showcaseConfig = {
       grid.removeAttribute('data-active');
     };
 
-    // Cursor personalizado - solo desktop
-    if (!isTouchDevice && cursor) {
-      const wrapper = document.querySelector('.featureCards-wrapper') as HTMLElement;
-      
-      if (wrapper) {
-        wrapper.addEventListener('mousemove', (e) => {
-          const rect = wrapper.getBoundingClientRect();
-          cursor.classList.add('active');
-          cursor.style.left = (e.clientX - rect.left) + 'px';
-          cursor.style.top = (e.clientY - rect.top) + 'px';
-        });
-
-        wrapper.addEventListener('mouseleave', () => {
-          cursor.classList.remove('active');
-        });
-      }
-    }
-
     // Para dispositivos táctiles (móvil)
     if (isTouchDevice) {
       const articles = grid.querySelectorAll('li');
       
       articles.forEach((li) => {
-        li.addEventListener('click', (e) => {
+        // CORRECCIÓN DE TIPO: Usamos MouseEvent (o Event) para el click
+        li.addEventListener('click', (e: MouseEvent) => {
           e.preventDefault();
-          const article = li.querySelector('article') as HTMLElement;
+          const article = li.querySelector('article') as HTMLElement | null;
           
           if (li.classList.contains('active')) {
-            // Si ya está activo, desactivar
             li.classList.remove('active');
             current = null;
             grid.removeAttribute('data-active');
           } else {
-            // Desactivar todos los demás
             articles.forEach(otherLi => otherLi.classList.remove('active'));
             
-            // Activar el nuevo
-            li.classList.add('active');
-            current = article;
-            grid.setAttribute('data-active', '');
-            sync();
+            if (article) { // Aseguramos que article no es null
+              li.classList.add('active');
+              current = article;
+              grid.setAttribute('data-active', '');
+              sync();
+            }
           }
         });
       });
 
       // Cerrar al hacer click fuera
-      document.addEventListener('click', (e) => {
+      // CORRECCIÓN DE TIPO en e.target: Se fuerza el tipo a Node para usar .contains()
+      document.addEventListener('click', (e: MouseEvent) => {
+        // 2. CORRECCIÓN DE ERROR
+        // Forzamos e.target a ser Node para que sea compatible con grid.contains()
         if (!grid.contains(e.target as Node)) {
           articles.forEach(li => li.classList.remove('active'));
           current = null;

@@ -9,6 +9,8 @@ import SwitchButton, { showcaseConfig as switchButtonConfig } from '@/components
 import NotificationStack, { showcaseConfig as notificationStackConfig } from '@/components/ui-showcase/NotificationStack.astro';
 import ThemeSwitcher, { showcaseConfig as themeSwitcherConfig } from '@/components/ui-showcase/ThemeSwitcher.astro';
 import KanbanBoard, { showcaseConfig as kanbanBoardConfig } from '@/components/ui-showcase/KanbanBoard.astro';
+import InputField, { showcaseConfig as inputFieldConfig } from '@/components/ui-showcase/InputField.astro';
+import DropdownMenu, { showcaseConfig as dropdownMenuConfig } from '@/components/ui-showcase/DropdownMenu.astro';
 
 ---
 
@@ -56,20 +58,20 @@ import KanbanBoard, { showcaseConfig as kanbanBoardConfig } from '@/components/u
        {...switchButtonConfig}
       >
       <SwitchButton />
-    </ComponentShowcase>
+      </ComponentShowcase>
       
-    <!-- En el main, donde van los componentes -->
-    <ComponentShowcase
-      id="notification-stack"
-      title="Notification Stack"
-      date="Nov 14, 2025"
-      description="iOS-style notification system with stacking effect, glassmorphism, and smooth animations. Hover to expand the stack."
-      {...notificationStackConfig}
-     >
-     <NotificationStack />
-  </ComponentShowcase>
+    <!-- Notification Stack Component -->
+       <ComponentShowcase
+       id="notification-stack"
+       title="Notification Stack"
+       date="Nov 14, 2025"
+       description="iOS-style notification system with stacking effect, glassmorphism, and smooth animations. Hover to expand the stack."
+       {...notificationStackConfig}
+      >
+       <NotificationStack />
+       </ComponentShowcase>
 
-    <ComponentShowcase
+     <ComponentShowcase
       id="theme-switcher"
       title="Theme Switcher"
       date="Nov 15, 2025"
@@ -77,19 +79,41 @@ import KanbanBoard, { showcaseConfig as kanbanBoardConfig } from '@/components/u
       {...themeSwitcherConfig}
      >
      <ThemeSwitcher />
-  </ComponentShowcase>
+     </ComponentShowcase>
 
   <!-- Kanban Board Component -->
-<ComponentShowcase
-id="kanban-board"
-title="Kanban Board"
-date="Nov 16, 2025"
-description="Drag-and-drop task management board with multiple columns. Move tasks between Backlog, In Progress, Review, and Done. Includes priorities, assignees, and due dates."
-{...kanbanBoardConfig}
->
-<KanbanBoard />
-</ComponentShowcase>
+    <ComponentShowcase
+      id="kanban-board"
+      title="Kanban Board"
+      date="Nov 16, 2025"
+      description="Drag-and-drop task management board with multiple columns. Move tasks between Backlog, In Progress, Review, and Done. Includes priorities, assignees, and due dates."
+      {...kanbanBoardConfig}
+     >
+    <KanbanBoard />
+    </ComponentShowcase>
 
+    <ComponentShowcase
+      id="input-field"
+      title="Input Field"
+      date="Nov 17, 2025"
+      description="Fluid Apple-style input fields with floating labels, validation feedback, and smooth micro-interactions. Email, password, and search variants included."
+      {...inputFieldConfig}
+    >
+   <InputField />
+   </ComponentShowcase>
+
+   <!-- Dropdown Menu Component -->
+  <ComponentShowcase
+    id="dropdown-menu"
+    title="Dropdown Menu"
+    date="Nov 17, 2025"
+    description="Five interactive dropdown menu examples with iOS/macOS design. Features smooth animations, glassmorphism, keyboard shortcuts, and checkable items."
+    {...dropdownMenuConfig}
+  >
+  <DropdownMenu />
+  </ComponentShowcase>
+
+   
 
     </div>
 
@@ -114,13 +138,13 @@ description="Drag-and-drop task management board with multiple columns. Move tas
         <a href="#kanban-board" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="kanban-board">
           Kanban Board
         </a>
+        <a href="#input-field" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="input-field">
+          Input Field
+        </a>
         <a href="#dropdown-menu" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="dropdown-menu">
           Dropdown Menu
         </a>
-        <a href="#notification-card" class="nav-item block text-[14px] text-gray-400 transition-all duration-300" data-target="notification-card">
-          Notification Card
-        </a>
-        
+       
       
       </nav>
     </aside>

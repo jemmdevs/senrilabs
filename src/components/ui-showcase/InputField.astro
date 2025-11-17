@@ -1,0 +1,229 @@
+---
+// Input Field Component - Pure Apple-style fluid interaction
+
+// CONFIGURACIÓN DEL SHOWCASE
+export const showcaseConfig = {
+  backgroundColor: '#f5f5f7',
+};
+---
+
+<!-- Input Field Container -->
+<div class="inputField-container">
+  
+  <!-- Single Focus Input -->
+  <div class="inputField-wrapper">
+    <div class="inputField-focus-indicator"></div>
+    <input 
+      type="text" 
+      class="inputField-input"
+      placeholder="You can type here..."
+      autocomplete="off"
+    />
+    <div class="inputField-glow"></div>
+  </div>
+
+  <!-- Morphing Button Input -->
+  
+
+</div>
+
+<style>
+  .inputField-container {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding: 40px 0;
+  }
+
+  /* ============================================ */
+  /* Simple Focus Input with Fluid Indicator */
+  /* ============================================ */
+  
+  .inputField-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .inputField-input {
+    width: 100%;
+    height: 56px;
+    padding: 0 20px;
+    font-size: 16px;
+    color: #1d1d1f;
+    background: white;
+    border: 1.5px solid #d1d1d6;
+    border-radius: 12px; /* Reduced from 16px to 12px for tighter iOS aesthetic */
+    outline: none;
+    /* Enhanced spring animation with exact iOS cubic-bezier */
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /* Multilayer shadows for depth like iOS 17 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04),
+                0 2px 4px rgba(0, 0, 0, 0.02),
+                0 4px 8px rgba(0, 0, 0, 0.01);
+    /* Prevent iOS zoom on double-tap */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .inputField-input::placeholder {
+    color: #86868b;
+    /* Placeholder fades upward on focus */
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .inputField-input:hover {
+    border-color: #a1a1a6;
+    /* Subtle lift on hover */
+    transform: translateY(-0.5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06),
+                0 4px 8px rgba(0, 0, 0, 0.04),
+                0 8px 16px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Active state with micro-press feedback */
+  .inputField-input:active {
+    transform: scale(0.995) translateY(0);
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .inputField-input:focus {
+    border-color: #007aff;
+    /* More pronounced lift with spring bounce */
+    transform: translateY(-3px) scale(1.005);
+    /* Enhanced glow with multilayer shadows */
+    box-shadow: 0 2px 4px rgba(0, 122, 255, 0.08),
+                0 4px 8px rgba(0, 122, 255, 0.06),
+                0 8px 16px rgba(0, 122, 255, 0.04),
+                0 16px 32px rgba(0, 122, 255, 0.02),
+                0 0 0 4px rgba(0, 122, 255, 0.08);
+  }
+
+  .inputField-input:focus::placeholder {
+    opacity: 0;
+    /* Placeholder slides up and fades */
+    transform: translateY(-8px);
+  }
+
+  /* Autofill styling override for clean iOS look */
+  .inputField-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px white inset;
+    -webkit-text-fill-color: #1d1d1f;
+  }
+
+  /* Filled state when input has value */
+  .inputField-input:not(:placeholder-shown) {
+    border-color: #a1a1a6;
+    background: #fafafa;
+  }
+
+  /* Fluid focus indicator */
+  .inputField-focus-indicator {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 40%;
+    height: 3px; /* Slightly thicker from 2px */
+    background: linear-gradient(90deg, 
+      transparent,
+      rgba(0, 122, 255, 0.3) 20%,
+      rgba(0, 122, 255, 0.7) 50%,
+      rgba(0, 122, 255, 0.3) 80%,
+      transparent
+    );
+    border-radius: 10px;
+    filter: blur(1.5px); /* More blur for softer glow */
+    opacity: 0;
+    /* Smoother spring animation */
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .inputField-input:focus ~ .inputField-focus-indicator {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1);
+    /* Continuous subtle pulse animation */
+    animation: pulse-indicator 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Pulse animation for focus indicator */
+  @keyframes pulse-indicator {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  /* Ambient glow effect */
+  .inputField-glow {
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(ellipse at center, 
+      rgba(0, 122, 255, 0.12) 0%, /* Increased intensity */
+      rgba(0, 122, 255, 0.05) 40%,
+      transparent 70%
+    );
+    opacity: 0;
+    /* Slower fade-in for ambient effect */
+    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    pointer-events: none;
+    border-radius: 50%;
+    filter: blur(20px); /* More blur for softer ambient light */
+  }
+
+  .inputField-input:focus ~ .inputField-glow {
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .inputField-container {
+      max-width: 100%;
+      gap: 40px;
+      padding: 32px 0;
+    }
+
+    .inputField-input {
+      height: 52px;
+      font-size: 16px; /* Keep 16px to prevent iOS zoom */
+      border-radius: 10px;
+    }
+  }
+
+  /* Reduced motion support for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .inputField-input,
+    .inputField-focus-indicator,
+    .inputField-glow {
+      transition-duration: 0.01ms !important;
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  const inputs = document.querySelectorAll('.inputField-input') as NodeListOf<HTMLInputElement>;
+  
+  inputs.forEach(input => {
+    // Smooth escape key handling
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        input.blur();
+      }
+    });
+
+    input.addEventListener('focus', () => {
+      input.style.transition = 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    });
+
+    input.addEventListener('blur', () => {
+      input.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+  });
+</script>
